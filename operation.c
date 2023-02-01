@@ -7,14 +7,16 @@ struct node {
     struct node *prev;
 };
 
-void    doublylink_new(char content, struct node *nextstack, struct node *prevstack)
+void    doublylink_new(int content, struct node **nextstack, struct node *prevstack)
 {
     struct node *new;
 
     new = (struct node*) malloc(sizeof(struct node));
     new->content = content;
-    new->next =  nextstack;
+    new->next =  *nextstack;
     new->prev = prevstack;
+    *nextstack = new;
+    printf("newcontent %d\n", (*nextstack)->content);
 }
 /*
 void    swap_a_or_b(struct node  *stack)
@@ -64,11 +66,9 @@ void rotate_a_or_b(int *stack)
 
 void ft_printlist(struct node *head) 
 {
-    printf("kaka\n");
-    struct node *temp = head;
-    while (temp != NULL) {
-        printf("vuvuvu %c\n", temp->content);
-        temp = temp->next;
+    while (head != NULL) {
+        printf("vuvuvu %d\n", head->content);
+        head = head->next;
     }
 }
 
@@ -82,13 +82,12 @@ int main(int argc, char **argv)
     if (argc == 1)
         return(0);
     argv ++;
-    while(argv[contador][0])
+    while(*argv)
     {
-        printf("kaka %c\n", **argv);
-        doublylink_new(**argv, head_a, NULL);
-        printf("jijijiult %c\n", **argv);
-        contador ++;
-        printf("ult %c\n", **argv);
+        printf("string %s\n", *argv);
+        doublylink_new(atoi(*argv), &head_a, NULL);
+        printf("head_a == %d\n", head_a->content);
+        argv ++;
     }
     ft_printlist(head_a);
     return(0);

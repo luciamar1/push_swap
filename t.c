@@ -2,12 +2,17 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-int main(char **argv)
+int main(int argc, char **argv)
 {
-    printf("hoal %s\n", *(argv));
-    while(*(*(argv)) != '\0')
+    while(*argv)
     {
-        printf("%c\n", **argv);
-        *argv = *argv + 1;
+        while(**argv)
+        {
+            printf("jujiju  %c\n", **argv);
+            (*argv) ++;
+        }
+        argv++;
     }
+    
+    return (0);
 }
