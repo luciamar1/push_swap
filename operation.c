@@ -3,31 +3,42 @@
 
 struct node {
     int content;
+    struct node *head;
     struct node *next;
     struct node *prev;
 };
 
-void    doublylink_new(int content, struct node **nextstack, struct node *prevstack)
+void    *doublylink_new(int content, struct node **prevstack, struct node *head, int orden)
 {
     struct node *new;
-
-    new = (struct node*) malloc(sizeof(struct node));
+    new = malloc(sizeof(struct node));
+    void *init_head = new;
+    if (new == NULL)
+        return(0);
     new->content = content;
-    new->next =  *nextstack;
-    new->prev = prevstack;
-    *nextstack = new;
-    printf("newcontent %d\n", (*nextstack)->content);
+    new->next =  NULL;
+    if(orden == 1)
+    {
+        new->head = head;
+        new->prev = *prevstack;
+        *prevstack = new;
+        (*prevstack)->prev->next = new;
+        return(0);
+    }
+    new->head = init_head;
+    new->prev = NULL;
+    return(new);
 }
-/*
-void    swap_a_or_b(struct node  *stack)
+
+void    swap_a_or_b(struct node  **stack)
 {
     int swap;
-
-    swap = stack[0];
-    stack[0] = stack[1];
-    stack[1] = swap;
+    swap = (*stack)->content;
+    (*stack)->content = ((*stack)->next->content);
+    printf("que esta mal?\n");
+    (*stack)->next->content = swap;
 }
-
+/*
 void    swap_a_and_b(int  *stack_a, int *stack_b)
 {
     int swap;
@@ -64,12 +75,19 @@ void rotate_a_or_b(int *stack)
     }
 }*/
 
-void ft_printlist(struct node *head) 
+struct node *build_lst( char **argv, int argc )
 {
-    while (head != NULL) {
-        printf("vuvuvu %d\n", head->content);
-        head = head->next;
+    struct node *head_a;
+
+    head_a = doublylink_new(atoi(argv[1]), NULL, NULL, 0);
+    printf("head_a == %d\n", head_a->content);
+    int i = 1;
+    while( ++i < argc)
+    {
+        doublylink_new(atoi(argv[i]), &head_a, head_a->head, 1);
+        printf("head_a == %d\n", head_a->content);
     }
+    return( head_a );
 }
 
 int main(int argc, char **argv)
@@ -81,14 +99,10 @@ int main(int argc, char **argv)
     head_a = (struct node *) malloc(sizeof(struct node));
     if (argc == 1)
         return(0);
-    argv ++;
-    while(*argv)
-    {
-        printf("string %s\n", *argv);
-        doublylink_new(atoi(*argv), &head_a, NULL);
-        printf("head_a == %d\n", head_a->content);
-        argv ++;
-    }
-    ft_printlist(head_a);
+
+    head_a = build_lst(argv, argc);
+    printf("%d\n", head_a->content);
+    head_a = head_a->head;
+    swap_a_or_b(&head_a);
     return(0);
 }
