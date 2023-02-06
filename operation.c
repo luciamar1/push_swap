@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-struct node {
+typedef struct s_doublelist {
     int content;
-    struct node *next;
-    struct node *prev;
-};
+    struct s_doublelist *next;
+    struct s_doublelist *prev;
+}   t_doublelist;
 
-void    *doublylink_new(int content, struct node **prevstack, struct node *head, int orden)
+
+void    *doublylink_new(int content, t_doublelist **prevstack, int orden)
 {
-    struct node *new;
-    new = malloc(sizeof(struct node));
+    t_doublelist *new;
+    new = malloc(sizeof(t_doublelist *));
     if (new == NULL)
         return(0);
     new->content = content;
@@ -26,28 +27,27 @@ void    *doublylink_new(int content, struct node **prevstack, struct node *head,
     return(new);
 }
 
-void    swap_a_or_b(struct node  **stack)
+void    swap_a_or_b(t_doublelist  **stack)
 {
     int swap;
     swap = (*stack)->content;
     (*stack)->content = ((*stack)->next->content);
-    printf("que esta mal?\n");
     (*stack)->next->content = swap;
 }
-/*
-void    swap_a_and_b(int  *stack_a, int *stack_b)
+
+void    swap_a_and_b(t_doublelist **stack_a, t_doublelist **stack_b)
 {
     int swap;
 
-    swap = stack_a[0];
-    stack_a[0] = stack_a[1];
-    stack_a[1] = swap;
-    int swap;
-    swap = stack_b[0];
-    stack_b[0] = stack_b[1];
-    stack_b[1] = swap;
-}
+    swap = (*stack_a)->content;
+    (* stack_a)->content = (*stack_a)->next->content;
+    (*stack_a)->next->content = swap;
 
+    swap = (*stack_b)->content;
+    (*stack_b)->content = (*stack_b)->next->content;
+    (*stack_b)->next->content = swap;
+}
+/* 
 int    *push_x(int *stack_x, int *stack_y)
 {
     int *stack_ny;
@@ -71,33 +71,52 @@ void rotate_a_or_b(int *stack)
     }
 }*/
 
-struct node *build_lst( char **argv, int argc )
+t_doublelist *build_lst( char **argv, int argc )
 {
-    struct node *head_a;
-    struct node init_a;
-
-    head_a = doublylink_new(atoi(argv[1]), NULL, NULL, 0);
+    t_doublelist *head_a;
+    t_doublelist *init_a;
+    
+    head_a = doublylink_new(atoi(argv[0]), NULL, 0);
     init_a = head_a;
-    printf("head_a == %d\n", head_a->content);
     int i = 1;
-    while( ++i < argc)
+    argc = argc - 2;
+    while(argc >= i++)
     {
-        doublylink_new(atoi(argv[i]), &head_a, head_a->head, 1);
-        printf("head_a == %d\n", head_a->content);
+        printf("holi %d\n", i);
+        printf("guatafac\n");
+        doublylink_new(atoi(argv[i]), &head_a, 1);
     }
+    printf("juju\n");
     return( init_a );
+}
+
+void    ft_printlista(t_doublelist *lista)
+{
+    while(lista->next)
+    {
+        printf("content %d\n", lista->content);
+        lista = lista->next;
+    }
+    printf("content %d\n", lista->content);
 }
 
 int main(int argc, char **argv)
 {
-    struct node *head_a;
+    t_doublelist *head_a;
+    t_doublelist *init_a;
+    t_doublelist *init_b;
+    t_doublelist *head_b;
   
     if (argc == 1)
         return(0);
-
-    head_a = build_lst(argv, argc);
-    printf("%d\n", head_a->content);
-    head_a = head_a->head;
-    swap_a_or_b(&head_a);
+    head_b = build_lst(argv, argc);
+    head_a = build_lst(++argv, argc);
+    printf("buenop\n");
+    init_a = head_a;
+    init_b = head_b;
+    ft_printlista(init_a);
+    printf("hola    \n\n");
+    swap_a_and_b(&head_a, &head_b);
+    ft_printlista(head_a);
     return(0);
 }
