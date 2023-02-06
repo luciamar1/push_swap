@@ -3,7 +3,6 @@
 
 struct node {
     int content;
-    struct node *head;
     struct node *next;
     struct node *prev;
 };
@@ -12,20 +11,17 @@ void    *doublylink_new(int content, struct node **prevstack, struct node *head,
 {
     struct node *new;
     new = malloc(sizeof(struct node));
-    void *init_head = new;
     if (new == NULL)
         return(0);
     new->content = content;
     new->next =  NULL;
     if(orden == 1)
     {
-        new->head = head;
         new->prev = *prevstack;
         *prevstack = new;
         (*prevstack)->prev->next = new;
         return(0);
     }
-    new->head = init_head;
     new->prev = NULL;
     return(new);
 }
@@ -78,8 +74,10 @@ void rotate_a_or_b(int *stack)
 struct node *build_lst( char **argv, int argc )
 {
     struct node *head_a;
+    struct node init_a;
 
     head_a = doublylink_new(atoi(argv[1]), NULL, NULL, 0);
+    init_a = head_a;
     printf("head_a == %d\n", head_a->content);
     int i = 1;
     while( ++i < argc)
@@ -87,16 +85,13 @@ struct node *build_lst( char **argv, int argc )
         doublylink_new(atoi(argv[i]), &head_a, head_a->head, 1);
         printf("head_a == %d\n", head_a->content);
     }
-    return( head_a );
+    return( init_a );
 }
 
 int main(int argc, char **argv)
 {
     struct node *head_a;
-    int contador;
-
-    contador = 0;
-    head_a = (struct node *) malloc(sizeof(struct node));
+  
     if (argc == 1)
         return(0);
 
