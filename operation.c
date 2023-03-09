@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 15:19:38 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/03/09 13:24:47 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/03/09 19:23:54 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,13 @@ typedef struct s_doublelist {
 
 void	ft_printlista(t_doublelist *lista, char x)
 {
+	printf("\n\n");
 	while (lista->next)
 	{
 		printf("printlista %c contenido == %d\n", x, lista->content);
 		lista = lista->next;
 	}
+	printf("printlista %c contenido == %d\n", x, lista->content);
 }
 
 void	ft_freedoublelist(t_doublelist *lista)
@@ -51,6 +53,7 @@ void	*doublylink_new(int content, t_doublelist **prevstack, int orden)
 	{
 		new->prev = *prevstack;
 		*prevstack = new;
+		printf("printlista previo contenido == %d\n", (*prevstack)->prev->content);
 		(*prevstack)->prev->next = new;
 		return ("bien");
 	}
@@ -85,10 +88,11 @@ void	swap_a_and_b(t_doublelist **stack_a, t_doublelist **stack_b)
 void	push_x(t_doublelist **stack_b, t_doublelist **stack_a)
 {
 	t_doublelist	*swap;
-	
+
 	swap = *stack_a;
 	*stack_a = (*stack_a)->next;
 	(*stack_a)->prev = NULL;
+	
 	swap->next = *stack_b;
 	*stack_b = swap;
 }
@@ -127,7 +131,6 @@ t_doublelist	*build_lst(char **argv, int argc)
 			return (NULL);
 		}
 	}
-	ft_printlista(init_a, 'A');
 	return (init_a);
 }
 
@@ -144,8 +147,19 @@ int	main(int argc, char **argv)
 	if (head_a == NULL)
 		return (1);
 	init_a = head_a;
-	//init_b = head_b;
+	init_b = head_b;
+	init_a = init_a->next;
+	printf("printlista previo contenido == %d\n", init_a->content);
+	init_a = init_a->next;
+	printf("printlista previo contenido == %d\n", init_a->prev->content);
+	init_a = init_a->next;
+	printf("printlista previo contenido == %d\n", init_a->prev->content);
+	init_a = init_a->next;
+	printf("printlista previo contenido == %d\n", init_a->prev->content);
+	printf("printlista previo contenido == %d\n", init_a->content);
+	ft_printlista(init_a, 'A');
 	push_x(&init_b, &init_a);
-	ft_printlista(init_b, 'B');
+	// ft_printlista(init_b, 'B');
+	// ft_printlista(init_a, 'A');
 	return (0);
 }
