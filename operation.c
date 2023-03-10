@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 15:19:38 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/03/09 19:23:54 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/03/10 14:17:01 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	*doublylink_new(int content, t_doublelist **prevstack, int orden)
 	{
 		new->prev = *prevstack;
 		*prevstack = new;
-		printf("printlista previo contenido == %d\n", (*prevstack)->prev->content);
 		(*prevstack)->prev->next = new;
 		return ("bien");
 	}
@@ -130,11 +129,12 @@ t_doublelist	*build_lst(char **argv, int argc)
 			ft_freedoublelist(head_a);
 			return (NULL);
 		}
+			printf("0j9999jioiojprintlista previo contenido == %d\n", init_a->content);
 	}
 	return (init_a);
 }
 
-int	main(int argc, char **argv)
+int	main (int argc, char **argv)
 {
 	t_doublelist	*head_a;
 	t_doublelist	*init_a;
@@ -151,7 +151,7 @@ int	main(int argc, char **argv)
 	init_a = init_a->next;
 	printf("printlista previo contenido == %d\n", init_a->content);
 	init_a = init_a->next;
-	printf("printlista previo contenido == %d\n", init_a->prev->content);
+	printf("printlista previo contenido == %d\n", init_a->content);
 	init_a = init_a->next;
 	printf("printlista previo contenido == %d\n", init_a->prev->content);
 	init_a = init_a->next;
