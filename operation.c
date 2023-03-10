@@ -129,7 +129,10 @@ t_doublelist	*build_lst(char **argv, int argc)
 			ft_freedoublelist(head_a);
 			return (NULL);
 		}
-			printf("0j9999jioiojprintlista previo contenido == %d\n", init_a->content);
+			//printf("printlista  koko previo contenido == %d\n", head_a->prev->content);
+			printf("printlista  koko lldklskdls previo contenido == %d\n", init_a->next->prev->content);
+			printf("printlista  koko lldklskdls previo contenido == %d\n", init_a->next->next->prev->content);
+
 	}
 	return (init_a);
 }
