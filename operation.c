@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/06 15:19:38 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/03/10 21:05:33 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/03/13 14:20:50 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,24 +127,36 @@ void rotate_a_or_b(int *stack)
 t_doublelist	*build_lst(char **argv, int argc)
 {
 	t_doublelist	*head_a;
-	t_doublelist	*init_a;
+	t_doublelist	**init_a;
 	int				i;
 
 	i = 1;
 	head_a = doublylink_new(atoi(argv[0]), NULL, 0);
 	if (head_a == NULL)
 		return (NULL);
-	init_a = head_a;
+	init_a = &head_a;
+	printf("dir memoria ==   %p  ==  %p \n", init_a, &head_a);
 	while (i < argc)
 	{
+		printf("content init a  == %d\n", (*init_a)->content);
 		if (doublylink_new(atoi(argv[i++]), &head_a, 1) == NULL)
 		{
 			ft_freedoublelist(head_a);
 			return (NULL);
 		}
+		printf("content prev%d\n", head_a->prev->content);
+		if (i == 3)
+			printf("content prev   guauuagsuagusaugdudusu %d\n", head_a->prev->prev->content);
 			//printf("printlista  koko previo contenido == %d\n", head_a->prev->content);
 	}
-	return (init_a);
+	while(argc > 0)
+	{
+		head_a = head_a->prev;
+		printf("oppopopopop content == %d\n", head_a->content);
+	}
+	ft_printlista(head_a, 'a');
+	//printf("content init a  == %d\n", (*init_a)->next->content);
+	return (head_a);
 }
 
 int	main (int argc, char **argv)
