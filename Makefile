@@ -1,4 +1,4 @@
-NAME = pipex
+NAME = push_swap
 
 SRCS = create_list.c
 
