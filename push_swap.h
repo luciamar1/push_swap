@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:16:39 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/03/22 19:31:03 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/03/28 18:54:01 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,12 @@ typedef struct s_dlist
     struct s_dlist *prev;
 }   t_dlist;
 
-
+void    reverse_rotate_a_b(t_dlist **stack_a, t_dlist **stack_b);
+void    reverse_rotate(t_dlist **stack_a);
+void    rotate(t_dlist **stack_a);
+void    rotate_a_and_b(t_dlist **stack_a, t_dlist **stack_b);
+int     swap_a_or_b(t_dlist  **stack);
+void    swap_a_and_b(t_dlist **stack_a, t_dlist **stack_b);
+void    push_x(t_dlist **stack_b, t_dlist **stack_a);
 
 #endif
