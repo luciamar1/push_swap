@@ -6,20 +6,23 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/03/28 18:49:26 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/03 12:27:27 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    ft_clear_dlist(t_dlist  **list)
+int    ft_clear_dlist(t_dlist  **list)
 {
-    while((*list)->next)
+    if(!*list)
+        return(1);
+    free(*list);
+    while((*list)->next != (*list)->next->next)
     {
         *list = (*list)->next;
-        free((*list)->prev);
+        free(*list);
     }
-    free(*list);
+    return(0);
 }
 
 
@@ -64,7 +67,7 @@ int ft_create_dlist(t_dlist **saltarina, int data)
 int main(int argc, char **argv)
 {
     t_dlist *stack_a;
-    //t_dlist *stack_b;
+    t_dlist *stack_b;
     int     i;
     int ar = argc;
     //t_dlist *f_stack_b;
@@ -83,7 +86,7 @@ int main(int argc, char **argv)
     stack_a->prev = f_stack_a;
     //swap_a_or_b(&f_stack_a);
     //swap_a_and_b(&f_stack_a, &stack_b);
-    reverse_rotate(&stack_a);
+    algorithm(&stack_a, &stack_b);
     printf("%d\n", stack_a->content);
     printf("%d\n", stack_a->next->content);
     printf("%d\n", stack_a->next->next->content);
