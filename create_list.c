@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/03 12:27:27 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/09 02:55:41 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,9 @@ int main(int argc, char **argv)
     stack_a->prev = f_stack_a;
     //swap_a_or_b(&f_stack_a);
     //swap_a_and_b(&f_stack_a, &stack_b);
+    //push_x(&stack_b, &stack_a);
     algorithm(&stack_a, &stack_b);
-    printf("%d\n", stack_a->content);
+    printf("b == %d\n", stack_b->next->content);
     printf("%d\n", stack_a->next->content);
     printf("%d\n", stack_a->next->next->content);
     //ft_print_dlist(stack_a);

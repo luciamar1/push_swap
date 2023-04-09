@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/03 12:30:08 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/09 03:19:11 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,24 @@
 
 void    push_20(t_dlist **stack_a, t_dlist **stack_b, int max)
 {
+    int init;
+    
+    init = (*stack_a)->content;
     if((*stack_a)->content < max)
             push_x(stack_a, stack_b);
-    while((*stack_a)->next != (*stack_a)->next->next)
+    *stack_a = (*stack_a)->next;
+    printf("CARACOOOOL\n");
+    while((*stack_a)->content != init)
     {
+        printf("max %d     content %d\n", max, (*stack_a)->content);
+        if((*stack_a)->content <= max)
+        {
+            push_x(&(*stack_a), &(*stack_b));
+            printf("ho  yuuuuhuuuuuu la   ===  %d \n", max);
+        }
         *stack_a = (*stack_a)->next;
-        if((*stack_a)->content < max)
-            push_x(stack_a, stack_b);
     }
+    printf("GUATAFAC\n");
 }
 
 void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
@@ -58,3 +68,4 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     }
     push_x(stack_b, stack_a);
 }
+

@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:27:02 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/03/28 18:53:39 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/09 03:16:45 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,14 +49,15 @@ int swap_a_or_b(t_dlist  **stack)
 
 void    push_x(t_dlist **stack_b, t_dlist **stack_a)
 {
-        t_dlist    *swap;
+    t_dlist    *swap;
 
-        swap = *stack_a;
-        *stack_a = (*stack_a)->next;
-        (*stack_a)->prev = NULL;
-
-        swap->next = *stack_b;
-        *stack_b = swap;
+    swap = *stack_a;
+    *stack_a = (*stack_a)->next;
+    printf("guatatatatattatatatatatatatatatatatata     =====    \n");
+    (*stack_a)->prev = NULL;
+    swap->next = *stack_b;
+    *stack_b = swap;
+    (*stack_b)->next = *stack_b;
 }
 
 void    swap_a_and_b(t_dlist **stack_a, t_dlist **stack_b)
