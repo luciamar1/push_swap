@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/09 02:55:41 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/12 13:02:17 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@ int    ft_clear_dlist(t_dlist  **list)
 
 void    ft_print_dlist(t_dlist  *list)
 {
-    printf("primero %d\n", list->content);
+    // printf("primero %d\n", list->content);
     //list = list->next;
     while(list->next)
     {
         printf("\n\n\n");
         //printf("prev %d\n", list->content);
-        printf("content %d\n", list->next->content);
-        printf("next %d\n", list->prev->content);
+        // printf("content %d\n", list->next->content);
+        // printf("next %d\n", list->prev->content);
         list = list->next;
-        printf("\n\n\n");
+        // printf("\n\n\n");
     }
 }
 
@@ -88,9 +88,9 @@ int main(int argc, char **argv)
     //swap_a_and_b(&f_stack_a, &stack_b);
     //push_x(&stack_b, &stack_a);
     algorithm(&stack_a, &stack_b);
-    printf("b == %d\n", stack_b->next->content);
-    printf("%d\n", stack_a->next->content);
-    printf("%d\n", stack_a->next->next->content);
+    // printf("b == %d\n", stack_b->next->content);
+    // printf("%d\n", stack_a->next->content);
+    // printf("%d\n", stack_a->next->next->content);
     //ft_print_dlist(stack_a);
     return (0);
 }

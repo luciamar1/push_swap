@@ -6,32 +6,47 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/09 03:19:11 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/12 18:09:52 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
+int    ft_len_dlist(t_dlist *stack)
+{
+    int len;
+    t_dlist *init;
+
+    len = 1;
+    init = stack;
+    stack = stack->next;
+    while(stack->content != init->content)
+    {
+        len ++;
+        stack = stack->next;
+    }
+    return(len);
+}
+
 void    push_20(t_dlist **stack_a, t_dlist **stack_b, int max)
 {
-    int init;
+    int len;
     
-    init = (*stack_a)->content;
-    if((*stack_a)->content < max)
-            push_x(stack_a, stack_b);
-    *stack_a = (*stack_a)->next;
-    printf("CARACOOOOL\n");
-    while((*stack_a)->content != init)
+    len = ft_len_dlist(*stack_a);
+    printf("===== %d\n", len);
+    while(len --)
     {
-        printf("max %d     content %d\n", max, (*stack_a)->content);
+        // printf("max %d     content %d\n", max, (*stack_a)->content);
         if((*stack_a)->content <= max)
         {
-            push_x(&(*stack_a), &(*stack_b));
-            printf("ho  yuuuuhuuuuuu la   ===  %d \n", max);
+            printf("GUATATATAAAAAA %d\n", (*stack_a)->content);
+            push_x(&(*stack_b), &(*stack_a));
         }
+        printf("GUATATATAAAAAA\n");
         *stack_a = (*stack_a)->next;
+        printf("while push %d\n", (*stack_a)->content);
     }
-    printf("GUATAFAC\n");
+    // printf("GUATAFAC\n");
 }
 
 void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
@@ -43,6 +58,7 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
     limit = 20;
     while(limit && (*stack_b)->next != (*stack_b)->next->next)
     {
+        printf("while order_nums\n");
         if((*stack_b)->content > max->content)
             max = *stack_b;
         (*stack_b) = (*stack_b)->next;
@@ -57,13 +73,15 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     int limit;
 
     limit = 20;
-    while((*stack_a)->next != (*stack_a)->next->next)
+    while(!stack_a)
     {
+        printf("CARAPAAAAAAAAAN %d\n", limit);
         push_20(stack_a, stack_b, limit);
         limit += 20;
     }
     while((*stack_b)->next != (*stack_b)->next->next)
     {
+        printf("while algorithm 1\n");
         order_nums(stack_b, stack_a);
     }
     push_x(stack_b, stack_a);
