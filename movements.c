@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:27:02 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/12 18:17:15 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/13 19:37:27 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,27 @@ void    push_x(t_dlist **stack_b, t_dlist **stack_a)
     t_dlist    *swap;
 
     swap = *stack_a;
-    //printf("guatatatatattatatatatatatatatatatatata     =====    \n");
     *stack_a = (*stack_a)->next;
-    (*stack_a)->prev = NULL;
+    (*stack_a)->prev = swap->prev;
     swap->next = *stack_b;
+    if(stack_b)
+    {
+        swap->prev = (*stack_b)->prev;
+        (*stack_b)->prev = swap;
+    }
+    printf("guatatatatattatatatatatatatatatatatata     =====    \n");
     *stack_b = swap;
     (*stack_b)->next = *stack_b;
-        printf("HOLA\n");
     if(*stack_a == swap)
-    {
         *stack_a = NULL;
-    }
+}
+
+void    push_x(t_dlist **stack_b, t_dlist **stack_a)
+{
+    t_dlist   *swap;
+
+    swap = *stack_a;
+    
 }
 
 void    swap_a_and_b(t_dlist **stack_a, t_dlist **stack_b)

@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/12 18:09:52 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:32:23 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,14 +39,16 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b, int max)
         // printf("max %d     content %d\n", max, (*stack_a)->content);
         if((*stack_a)->content <= max)
         {
-            printf("GUATATATAAAAAA %d\n", (*stack_a)->content);
+            printf("HA ENCONTRADO LIMITE %d\n", (*stack_a)->content);
             push_x(&(*stack_b), &(*stack_a));
+            printf("GUATATATAAAAAA %d\n", (*stack_a)->content);
+            printf("GUATATATAAAAAA NEXT %d\n", (*stack_a)->next->next->content);
+            printf("GUATATATAAAAAA PREV %d\n", (*stack_a)->prev->content);
         }
-        printf("GUATATATAAAAAA\n");
-        *stack_a = (*stack_a)->next;
-        printf("while push %d\n", (*stack_a)->content);
+        else
+            *stack_a = (*stack_a)->next;
+       // printf("while push %d\n", (*stack_a)->content);
     }
-    // printf("GUATAFAC\n");
 }
 
 void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
@@ -73,9 +75,9 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     int limit;
 
     limit = 20;
-    while(!stack_a)
+    while((*stack_a))
     {
-        printf("CARAPAAAAAAAAAN %d\n", limit);
+        printf("CARAPAAAAAAAAAN    limit ====  %d\n", limit);
         push_20(stack_a, stack_b, limit);
         limit += 20;
     }

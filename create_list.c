@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/12 13:02:17 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/13 15:00:06 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,9 @@ int main(int argc, char **argv)
     //swap_a_and_b(&f_stack_a, &stack_b);
     //push_x(&stack_b, &stack_a);
     algorithm(&stack_a, &stack_b);
-    // printf("b == %d\n", stack_b->next->content);
-    // printf("%d\n", stack_a->next->content);
-    // printf("%d\n", stack_a->next->next->content);
+    //  printf("b == %d\n", stack_b->next->content);
+    //  printf("%d\n", stack_a->content);
+    //  printf("%d\n", stack_a->next->content);
     //ft_print_dlist(stack_a);
     return (0);
 }
