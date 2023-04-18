@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:16:39 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/17 11:37:47 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/18 18:48:08 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,10 @@
 
 typedef struct s_dlist
 {
-    int content;
-    struct s_dlist *next;
-    struct s_dlist *prev;
+    int             content;
+    int             index;
+    struct s_dlist  *next;
+    struct s_dlist  *prev;
 }   t_dlist;
 
 int     ft_len_dlist(t_dlist *stack);

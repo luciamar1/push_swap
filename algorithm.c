@@ -6,12 +6,11 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/17 11:44:00 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/18 19:46:47 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
 int    ft_len_dlist(t_dlist *stack)
 {
     int len;
@@ -28,52 +27,66 @@ int    ft_len_dlist(t_dlist *stack)
     return(len);
 }
 
+void    put_indice(t_dlist **list)
+{
+    t_dlist *head;
+    t_dlist **min;
+    int     ind;
+    int     len;
+    
+    len = ft_len_dlist(*list);
+    head = *list;
+    min = &(*list);
+    ind = 0;
+    while(len --)
+    {
+         *list = (*list)->next;
+        while((*list)->content != head->content)
+        {
+            if((*list)->content < (*min)->content)
+                min = &(*list);
+            *list = (*list)->next;
+        }
+        if((*list)->content < (*min)->content)
+            (*min)->index = ind;
+        ind ++;
+    }
+}
+
+
 void    push_20(t_dlist **stack_a, t_dlist **stack_b, int max)
 {
     int len;
+    int head;
     
+    head = 1;    
     len = ft_len_dlist(*stack_a);
     // printf("===== %d\n", len);
     while(len --)
     {
-        //printf("max %d     content %d\n", max, (*stack_a)->content);
         if((*stack_a)->content <= max)
         {
-            // printf("HA ENCONTRADO LIMITE %d\n", (*stack_a)->content);
-            //printf("stack_a == %d    max == %d\n", (*stack_a)->content, max);
-            push_x(&(*stack_b), &(*stack_a));
-            // printf("GUATATATAAAAAA %d\n", (*stack_a)->content);
-            //printf("GUATATATAAAAAA NEXT %d\n", (*stack_a)->next->next->content);
-            // printf("GUATATATAAAAAA PREV %d\n", (*stack_a)->prev->content);
+            if(head == 1)
+            {
+                push_x(&(*stack_b), &(*stack_a));
+                head = 0;
+            }
+            if(head == 0)
+            {
+                push_x(&(*stack_b), &(*stack_a));
+                rotate(stack_b);
+                head = 1;
+            }
+            //ft_printf_dlist(*stack_a);
         }
         else
             *stack_a = (*stack_a)->next;
-       //printf("while push %d\n", (*stack_a)->content);
     }
 }
 
 void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
 {
-    int     limit;
-    t_dlist *max;
-
-    max = *stack_b;
-    limit = 20;
-    while(limit && (*stack_b)->next != (*stack_b)->next->next)
-    {
-        // printf("while order_nums\n");
-        ft_printf_dlist(*stack_b);
-        printf("holiiis? %d\n", max->content);
-        if((*stack_b)->content > max->content)
-        {
-            max = *stack_b;
-            
-        }
-        (*stack_b) = (*stack_b)->next;
-        limit --;
-    }
-    if((*stack_b)->next != (*stack_b)->next->next)
-        push_x(&max, stack_a);
+    
 }
 
 void algorithm(t_dlist **stack_a, t_dlist **stack_b)
