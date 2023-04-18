@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 18:30:29 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:44:00 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,16 +40,16 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b, int max)
         if((*stack_a)->content <= max)
         {
             // printf("HA ENCONTRADO LIMITE %d\n", (*stack_a)->content);
+            //printf("stack_a == %d    max == %d\n", (*stack_a)->content, max);
             push_x(&(*stack_b), &(*stack_a));
             // printf("GUATATATAAAAAA %d\n", (*stack_a)->content);
-            // printf("GUATATATAAAAAA NEXT %d\n", (*stack_a)->next->next->content);
+            //printf("GUATATATAAAAAA NEXT %d\n", (*stack_a)->next->next->content);
             // printf("GUATATATAAAAAA PREV %d\n", (*stack_a)->prev->content);
         }
         else
             *stack_a = (*stack_a)->next;
        //printf("while push %d\n", (*stack_a)->content);
     }
-    printf("stack_a == %d\n", (*stack_a)->content);
 }
 
 void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
@@ -62,8 +62,13 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
     while(limit && (*stack_b)->next != (*stack_b)->next->next)
     {
         // printf("while order_nums\n");
+        ft_printf_dlist(*stack_b);
+        printf("holiiis? %d\n", max->content);
         if((*stack_b)->content > max->content)
+        {
             max = *stack_b;
+            
+        }
         (*stack_b) = (*stack_b)->next;
         limit --;
     }

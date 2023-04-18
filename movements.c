@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:27:02 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 18:21:18 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/17 11:37:28 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,14 +67,35 @@ int swap_a_or_b(t_dlist  **stack)
 //         *stack_a = NULL;
 // }
 
+void    ft_printf_dlist(t_dlist *list)
+{
+    t_dlist *start;
+    
+    start = list;
+    printf("print list == %d\n", list->content);
+    list = list->next;
+    while(list->content != start->content)
+    {
+        printf("print list == %d\n", list->content);
+        list = list->next;
+    }
+    printf("\n\n");
+}
+
 void    push_x(t_dlist **stack_b, t_dlist **stack_a)
 {
     t_dlist   *swap;
 
     swap = *stack_a;
-    *stack_a =  (*stack_a)->next;
-    (*stack_a)->prev = swap->prev;
-    swap->prev->next = *stack_a;
+    if(ft_len_dlist(*stack_a) == 1)
+        *stack_a = NULL;
+    else
+    {
+        *stack_a =  (*stack_a)->next;
+        (*stack_a)->prev = swap->prev;
+        (*stack_a)->prev->next = *stack_a;
+    }
+    //printf("%d\n", (*stack_a)->prev->next->content);
     if(*stack_b)
     {
         swap->prev = (*stack_b)->prev;
