@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/14 18:23:13 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/20 20:48:22 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int ft_create_dlist(t_dlist **saltarina, int data)
         return (1);
     }
     new->content = data;
+    new->index = -1;
     new->prev = *saltarina;
     new->next = NULL;
   

@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:16:39 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/18 18:48:08 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/20 16:14:47 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct s_dlist
 
 int     ft_len_dlist(t_dlist *stack);
 void    ft_printf_dlist(t_dlist *list);
-void    push_20(t_dlist **stack_a, t_dlist **stack_b, int max);
+void    push_20(t_dlist **stack_a, t_dlist **stack_b);
 void    order_nums(t_dlist **stack_b, t_dlist **stack_a);
 void    algorithm(t_dlist **stack_a, t_dlist **stack_b);
 void    reverse_rotate_a_b(t_dlist **stack_a, t_dlist **stack_b);

@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:27:02 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/18 19:13:53 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/20 21:12:05 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 void reverse_rotate(t_dlist **stack_a)
 {
+    if(!*stack_a)
+        return;
     *stack_a = (*stack_a)->prev;
 }
 
