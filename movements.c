@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:27:02 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/20 21:12:05 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/24 20:43:03 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ void reverse_rotate_a_b(t_dlist **stack_a, t_dlist **stack_b)
 
 void rotate(t_dlist **stack_a)
 {
-    *stack_a = (*stack_a)->next;
+    if(*stack_a)
+        *stack_a = (*stack_a)->next;
 }
 
 void rotate_a_and_b(t_dlist **stack_a, t_dlist **stack_b)

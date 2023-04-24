@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/20 21:33:04 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/24 21:08:43 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,42 +24,40 @@ int    ft_len_dlist(t_dlist *stack)
     while(stack != init)
     {
         len ++;
-        printf("len en contar == %d\n", len);
+        // printf("len en contar == %d\n", len);
         stack = stack->next;
     }
     return(len);
 }
 
-void    put_indice(t_dlist **list)
+void    put_indice(t_dlist *list)
 {
-    t_dlist *head;
     t_dlist *min;
+    t_dlist *head;
     int     ind;
     int     len;
     int     l;
    
-    len = ft_len_dlist(*list);
-    head = *list;
-    min = *list;
+    len = ft_len_dlist(list);
+    head = list;
+    min = list;
     ind = 0;
-    *list = head;
+    l = ft_len_dlist(list);
     while(len --)
     {
-        l = ft_len_dlist(*list);
-        while(l-- && (*list)->index != -1)
-            *list = (*list)->next;
-        if ((*list)->index != -1)
-            break ;
-        min = *list;
-        *list = head;
-        l = ft_len_dlist(*list);
+        l = ft_len_dlist(list);
+        while(l-- && (list)->index != -1)
+            list = (list)->next;
+        min = (list);
+        l = ft_len_dlist(list);
         while(l--)
         {
-            if((*list)->content < min->content && (*list)->index == -1)
-                min = *list;    
-            *list = (*list)->next;
+            if((list)->content < min->content && (list)->index == -1)   
+                min = list;
+            list = (list)->next;
         }
-        min->index = ind;
+        if(min->index == -1)
+            min->index = ind;
         ind ++;
     }
 }
@@ -72,6 +70,7 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
     int max;
     
     len = ft_len_dlist(*stack_a);
+    printf("%d\n", len);
     max = len / 5;
     head = 1;
     int cont = 0;
@@ -79,45 +78,46 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
     {
         while(len --)
         {
+           // printf("%d\n", len);
             if((*stack_a)->index <= max)
             {
                 if(head == 1)
                 {
                     cont ++;
-                    printf("\n\nhead == %d\n\n", head);
+                    printf("arriba == %d\n", (*stack_a)->content);
                     push_x(&(*stack_b), &(*stack_a));
                     head = 0;
-                    printf("primera\nlist  ==  %d   head  ==  %d\n", (*stack_b)->content, head);
-                    
-        
                 }
-                else if(head == 0)
+                else 
                 {
                     cont++;
-                    printf("\n\nhead == %d\n\n", head);
                     push_x(&(*stack_b), &(*stack_a));
-                    printf("\nsegunda\nlist  ==  %d   head  ==  %d\n", (*stack_b)->content, head);
-                    //rotate(stack_b);
+                     while(*stack_b)
+                    {
+                        printf("content == %d indice == %d\n", (*stack_b)->content, (*stack_b)->index);
+                        (*stack_b) = (*stack_b)->prev;
+                    }
+                    printf("stack_b ROTATEEEEE %d\n", (*stack_b)->content);
+                    rotate(stack_b);
+                    ft_printf_dlist(*stack_b);
+                    printf("\n\n\n");
+                    //printf("abajo == %d\n", (*stack_a)->content);
                     head = 1;
                 }
-                //printf("buenos dias prechiocha\n");
-                //(*stack_a) = (*stack_a)->next;
+                if (*stack_a)
+                    (*stack_a) = (*stack_a)->next;
             }
             else
             {
-                //printf("===== %d\n", (*stack_a)->content);,
                 if (*stack_a)
-                    *stack_a = (*stack_a)->next;
-
+                    rotate(stack_a);
             }
         }
-        len = ft_len_dlist(*stack_a);
+        if (*stack_a)
+            len = ft_len_dlist(*stack_a);
         max += max;
-        printf("gatatatatata\n\n\n");
-        ft_printf_dlist(*stack_b);
-        printf("\n\n\n");
-        printf("He pushead %d\n", cont);
     }
+        printf("helo\n");
 }
 
 int ft_optim(int index, t_dlist *stack_next)
@@ -154,16 +154,21 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
     while(len --)
     {
         arriba = ft_optim(index, *stack_b);
-        printf("buenos dias preciosa =)\n");
+        // printf("buenos dias preciosa =)\n");
         //ft_printf_dlist(*stack_b);
         while((*stack_b)->index != len)
         {
             if(arriba == 1)
-                push_x(&(*stack_b), &(*stack_a));
-            if(arriba == 0)
             {
                 push_x(&(*stack_b), &(*stack_a));
-                rotate(stack_b);
+                arriba = 0;
+            }
+            if(arriba == 0)
+            {
+                printf("stack a ROTATEEEEE %d\n", (*stack_b)->content);
+                push_x(&(*stack_b), &(*stack_a));
+                rotate(&(*stack_b));
+                arriba = 1;
             }
         }
     }
@@ -172,10 +177,23 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
 void algorithm(t_dlist **stack_a, t_dlist **stack_b)
 {
     int limit;
-
     limit = 20;
-    put_indice(stack_a);
+    // while(*stack_a)
+    // {
+    //      printf("content == %d indice == %d\n", (*stack_a)->content, (*stack_a)->index);
+    //     (*stack_a) = (*stack_a)->prev;
+    // }
+    //int l = ft_len_dlist(*stack_a);
+    int l = ft_len_dlist(*stack_a);
+    put_indice(*stack_a);
     push_20(stack_a, stack_b);
+    printf("        len == %d\n", l);
+    while(l--)
+    {
+        printf("content == %d indice == %d\n", (*stack_b)->content, (*stack_b)->index);
+        (*stack_b) = (*stack_b)->next;
+    }
+    printf("\n\n\n\n\n");
     // while((*stack_a))
     // {
     //     push_20(stack_a, stack_b, limit);
@@ -183,20 +201,20 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     //     limit += 20;
     // }
     //ft_printf_dlist(*stack_b);
-    int len = ft_len_dlist(*stack_b);
-    printf("len == %d\n", len);
-    for(int i = 0; i < 7; i++)
-    {
-        printf("Len == %d\n", (*stack_b)->content);
-        *stack_b = (*stack_b)->next;
+    // int len = ft_len_dlist(*stack_b);
+    // // printf("len == %d\n", len);
+    // for(int i = 0; i < 7; i++)
+    // {
+    //     printf("Len == %d\n", (*stack_b)->content);
+    //     *stack_b = (*stack_b)->next;
         
-    }
+    // }
     exit(1);
     while((*stack_b)->next != (*stack_b)->next->next)
     {
         // printf("while algorithm 1\n");
         order_nums(stack_b, stack_a);
-        printf("%d\n", limit);
+        // printf("%d\n", limit);
     }
     push_x(stack_b, stack_a);
 }
