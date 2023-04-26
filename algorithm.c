@@ -33,13 +33,11 @@ int    ft_len_dlist(t_dlist *stack)
 void    put_indice(t_dlist *list)
 {
     t_dlist *min;
-    t_dlist *head;
     int     ind;
     int     len;
     int     l;
    
     len = ft_len_dlist(list);
-    head = list;
     min = list;
     ind = 0;
     l = ft_len_dlist(list);
@@ -70,42 +68,35 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
     int max;
     
     len = ft_len_dlist(*stack_a);
-    printf("%d\n", len);
+    printf("   leeeeen %d\n", len);
     max = len / 5;
     head = 1;
     int cont = 0;
+    ft_printf_dlist(*stack_a);
     while(*stack_a) 
     {
         while(len --)
         {
-           // printf("%d\n", len);
             if((*stack_a)->index <= max)
             {
+                printf("INDEX %d      MAX %d\n", (*stack_a)->index, max);
                 if(head == 1)
                 {
                     cont ++;
-                    printf("arriba == %d\n", (*stack_a)->content);
+                    //printf("stack a  == %d     ", (*stack_a)->index);
                     push_x(&(*stack_b), &(*stack_a));
                     head = 0;
+                    //printf("GUATATATATTATA push == %d\n", max);
                 }
                 else 
                 {
                     cont++;
+                    //printf("stack a  == %d     ", (*stack_a)->index);
                     push_x(&(*stack_b), &(*stack_a));
-                     while(*stack_b)
-                    {
-                        printf("content == %d indice == %d\n", (*stack_b)->content, (*stack_b)->index);
-                        (*stack_b) = (*stack_b)->prev;
-                    }
-                    printf("stack_b ROTATEEEEE %d\n", (*stack_b)->content);
                     rotate(stack_b);
-                    ft_printf_dlist(*stack_b);
-                    printf("\n\n\n");
-                    //printf("abajo == %d\n", (*stack_a)->content);
                     head = 1;
+                    //printf("GUATATATATTATA rotate == %d\n", max);
                 }
-                if (*stack_a)
-                    (*stack_a) = (*stack_a)->next;
             }
             else
             {
@@ -117,7 +108,8 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
             len = ft_len_dlist(*stack_a);
         max += max;
     }
-        printf("helo\n");
+    printf("\n\n\n");
+    ft_printf_dlist(*stack_b);
 }
 
 int ft_optim(int index, t_dlist *stack_next)
@@ -176,13 +168,12 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
 
 void algorithm(t_dlist **stack_a, t_dlist **stack_b)
 {
-    int limit;
-    limit = 20;
+    
     // while(*stack_a)
     // {
     //      printf("content == %d indice == %d\n", (*stack_a)->content, (*stack_a)->index);
     //     (*stack_a) = (*stack_a)->prev;
-    // }
+    // } 
     //int l = ft_len_dlist(*stack_a);
     int l = ft_len_dlist(*stack_a);
     put_indice(*stack_a);
@@ -190,7 +181,7 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     printf("        len == %d\n", l);
     while(l--)
     {
-        printf("content == %d indice == %d\n", (*stack_b)->content, (*stack_b)->index);
+        printf("         content == %d indice == %d\n", (*stack_b)->content, (*stack_b)->index);
         (*stack_b) = (*stack_b)->next;
     }
     printf("\n\n\n\n\n");

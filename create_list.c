@@ -30,10 +30,14 @@ void    ft_print_dlist(t_dlist  *list)
 {
     // printf("primero %d\n", list->content);
     //list = list->next;
-    while(list->next)
+    t_dlist *head;
+    head = list;
+    printf("\n\n\n");
+    printf("lista == %d\n", list->content);
+    list = list->next;
+    while(list != head)
     {
-        printf("\n\n\n");
-        //printf("prev %d\n", list->content);
+        printf("lista == %d\n", list->content);
         // printf("content %d\n", list->next->content);
         // printf("next %d\n", list->prev->content);
         list = list->next;
@@ -71,6 +75,7 @@ int main(int argc, char **argv)
     t_dlist *stack_b;
     int     i;
     int ar = argc;
+    stack_b = NULL;
     //t_dlist *f_stack_b;
     t_dlist *f_stack_a;
     i = ar;
@@ -87,7 +92,20 @@ int main(int argc, char **argv)
     stack_a->prev = f_stack_a;
     //swap_a_or_b(&f_stack_a);
     //swap_a_and_b(&f_stack_a, &stack_b);
-    //push_x(&stack_b, &stack_a);
+    /*push_x(&stack_b, &stack_a);
+    rotate(&stack_b);
+    ft_print_dlist(stack_b);
+    push_x(&stack_b, &stack_a);
+    rotate(&stack_b);
+    ft_print_dlist(stack_b);
+    push_x(&stack_b, &stack_a);
+    rotate(&stack_b);
+    ft_print_dlist(stack_b);
+    while(stack_b)
+    {
+        printf("stack_b  ==  %d\n", stack_b->content);
+        stack_b = stack_b->next;
+    }*/
     algorithm(&stack_a, &stack_b);
     //   printf("b == %d\n", stack_b->next->content);
     //   printf("%d\n", stack_a->content);

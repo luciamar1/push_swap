@@ -85,6 +85,43 @@ void    ft_printf_dlist(t_dlist *list)
     printf("\n\n");
 }
 
+/*void    push_x(t_dlist **stack_b, t_dlist **stack_a)
+{
+    t_dlist   *swap;
+
+    swap = *stack_a;
+    if(ft_len_dlist(*stack_a) == 1)
+        *stack_a = NULL;
+    else
+    {
+        *stack_a =  (*stack_a)->next;
+        (*stack_a)->prev = swap->prev;
+        (*stack_a)->prev->next = *stack_a;
+    }
+    if((*stack_b)->content)
+    {
+        printf("yes stack_b\n");
+        swap->prev = (*stack_b)->prev;
+        swap->next = (*stack_b);
+        (*stack_b)->prev->next = swap;
+        (*stack_b)->prev = swap;
+        *stack_b = swap;
+    }
+    else
+    {
+        printf("no\n");
+        ft_printf_dlist(*stack_a);
+        write(1,"hola\n", 5);
+        //printf("GUATATATATA\n");    
+        printf("no stack_b\n");
+        *stack_b = swap;
+        (*stack_b)->next = (*stack_b);
+        (*stack_b)->prev = (*stack_b);
+    }
+    printf("GUATATATATA\n");
+
+}*/
+
 void    push_x(t_dlist **stack_b, t_dlist **stack_a)
 {
     t_dlist   *swap;
