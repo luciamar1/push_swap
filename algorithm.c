@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 21:08:43 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/04/28 17:07:57 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,38 +149,67 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
 {
     int len;
     int ind;
+    int x;
     int l;
     int saltarin;
     t_dlist *list;
 
-    ind = 0;
+    l = ft_len_dlist(*stack_b);
+    ind = l-1;
     list = *stack_b;
-    while(l --)
+    while (l--)
     {
+        printf("GUATATATATTATA CONTENT =) %d\n", (list)->index);
+        (list) = (list)->next;
+    }
+     l = ft_len_dlist(*stack_b);
+     printf("%d\n",list->index );
+
+    while(l--)
+    {
+        
+        //printf("INDEX == %d        IND === %d\n", list->index, ind);
         len = ft_len_dlist(list);
         saltarin = 0;
         while(list->index != ind)
         {
             list = list->next;
             saltarin ++;
-        }
-        if (list->index != ind && saltarin / 2 < len / 2)
+        
+            while (l--)
         {
-            while(saltarin --)
-                rotate(stack_b);
+            printf("GUATATATATTATA CONTENT =) %d\n", (list)->index);
+            (list) = (list)->next;
         }
-        else if(list->index != ind)
-        {
-            while(saltarin --)
-                reverse_rotate(stack_b);
+                    
+            sleep(2);
+
+            printf("I cacacacacacaca NDEX == %d        IND === %d\n", list->index, ind);
         }
-        if(list->index != ind)
-            push_x(stack_a, stack_b);
-        ind ++;
-        printf("bucle nucleo %d\n", list->content);
+        sleep(2);
+        printf("caca %p\n", (*stack_a));
+       if (list->index == ind && (saltarin / 2) < (len / 2))
+       {
+           while(saltarin --)
+           {
+               printf("2\n");
+               rotate(stack_b);
+           }
+       }
+       else if (list->index == ind && saltarin / 2 < len / 2)
+       {
+           while(saltarin --)
+           {
+               printf("3\n");
+               reverse_rotate(stack_b);
+           }
+       }
+       push_x(stack_a, stack_b);
+       ind --;
+       printf("bucle nucleo %d\n", list->content);
     }
     printf("\n\n\n\nGUATATATATATATA\n");
-    ft_printf_dlist(*stack_a);
+    //ft_printf_dlist(*stack_a);
 
 }
 
@@ -227,13 +256,13 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     int l = ft_len_dlist(*stack_a);
     put_indice(*stack_a);
     push_20(stack_a, stack_b);
-    order_nums(stack_b, stack_a);
-    printf("        len == %d\n", l);
     while(l--)
     {
         printf("         content == %d indice == %d\n", (*stack_b)->content, (*stack_b)->index);
         (*stack_b) = (*stack_b)->next;
     }
+    order_nums(stack_b, stack_a);
+    printf("        len == %d\n", l);
     printf("\n\n\n\n\n");
     // while((*stack_a))
     // {
