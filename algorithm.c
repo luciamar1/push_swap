@@ -66,12 +66,15 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
     int len;
     int head;
     int max;
+    int optim;
+    int op;
     
     len = ft_len_dlist(*stack_a);
     printf("   leeeeen %d\n", len);
     max = len / 5;
     head = 1;
     int cont = 0;
+    optim = 0;
     ft_printf_dlist(*stack_a);
     while(*stack_a) 
     {
@@ -79,6 +82,11 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
         {
             if((*stack_a)->index <= max)
             {
+                op = optim;
+                while(op --)
+                    *stack_a = (*stack_a)->prev;
+                while(optim --)
+                    rotate(stack_a);
                 printf("INDEX %d      MAX %d\n", (*stack_a)->index, max);
                 if(head == 1)
                 {
@@ -97,11 +105,13 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                     head = 1;
                     //printf("GUATATATATTATA rotate == %d\n", max);
                 }
+                optim = 0;
             }
             else
             {
+                optim ++;
                 if (*stack_a)
-                    rotate(stack_a);
+                    (*stack_a) = (*stack_a)->next;
             }
         }
         if (*stack_a)
@@ -136,6 +146,45 @@ int ft_optim(int index, t_dlist *stack_next)
 }
 
 void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
+{
+    int len;
+    int ind;
+    int l;
+    int saltarin;
+    t_dlist *list;
+
+    ind = 0;
+    list = *stack_b;
+    while(l --)
+    {
+        len = ft_len_dlist(list);
+        saltarin = 0;
+        while(list->index != ind)
+        {
+            list = list->next;
+            saltarin ++;
+        }
+        if (list->index != ind && saltarin / 2 < len / 2)
+        {
+            while(saltarin --)
+                rotate(stack_b);
+        }
+        else if(list->index != ind)
+        {
+            while(saltarin --)
+                reverse_rotate(stack_b);
+        }
+        if(list->index != ind)
+            push_x(stack_a, stack_b);
+        ind ++;
+        printf("bucle nucleo %d\n", list->content);
+    }
+    printf("\n\n\n\nGUATATATATATATA\n");
+    ft_printf_dlist(*stack_a);
+
+}
+
+void    order_num(t_dlist **stack_b, t_dlist **stack_a)
 {
     int len;
     int index;
@@ -178,6 +227,7 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     int l = ft_len_dlist(*stack_a);
     put_indice(*stack_a);
     push_20(stack_a, stack_b);
+    order_nums(stack_b, stack_a);
     printf("        len == %d\n", l);
     while(l--)
     {
