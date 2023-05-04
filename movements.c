@@ -12,41 +12,62 @@
 
 #include "push_swap.h"
 
-void reverse_rotate(t_dlist **stack_a)
+void reverse_rotate(t_dlist **stack_a, char stack)
 {
     if(!*stack_a)
         return;
     *stack_a = (*stack_a)->prev;
+    if(stack == 'a')
+        write(1, "rra\n", 4);
+    if(stack == 'b')
+        write(1, "rrb\n", 4);
 }
 
-void reverse_rotate_a_b(t_dlist **stack_a, t_dlist **stack_b)
+void reverse_rotate_a_b(t_dlist **stack_a, t_dlist **stack_b, char stack)
 {
-    reverse_rotate(stack_a);
-    reverse_rotate(stack_b);
+    reverse_rotate(stack_a, stack);
+    reverse_rotate(stack_b, stack);
 }
 
-void rotate(t_dlist **stack_a)
+void rotate(t_dlist **stack_a, char stack)
 {
     if(*stack_a)
         *stack_a = (*stack_a)->next;
+    if(stack == 'a')
+        write(1, "ra\n", 3);
+    if(stack == 'b')
+        write(1, "rb\n", 3);
+    
 }
 
-void rotate_a_and_b(t_dlist **stack_a, t_dlist **stack_b)
+void rotate_a_and_b(t_dlist **stack_a, t_dlist **stack_b, char stack)
 {
-    rotate(stack_a);
-    rotate(stack_b);
+    rotate(stack_a, stack);
+    rotate(stack_b, stack);
 }
 
-int swap_a_or_b(t_dlist  **stack)
+int swap_a_or_b(t_dlist  **stack, char letter)
 {
     
     int     swap;
     
     if(!*stack)
         return (1);
+    printf("                                   GUATATATATTATATATAAAAAAA     == %d\n", ((*stack)->index));
     swap = (*stack)->content;
-    (*stack)->content = ((*stack)->prev->content);
-    (*stack)->prev->content = swap;
+    (*stack)->content = ((*stack)->next->content);
+    (*stack)->next->content = swap;
+    swap = (*stack)->index;
+    (*stack)->index = ((*stack)->next->index);
+    (*stack)->next->index = swap;
+    printf("                                   GUATATATATTATATATAAAAAAA     == %d\n", ((*stack)->index));
+
+    if(letter == 'a')
+        write(1, "sa\n", 3);
+    if(letter == 'b')
+        write(1, "sb\n", 3);
+    printf("                                   GUATATATATTATATATAAAAAAA\n");
+    ft_printf_dlist_ind(*stack);
     return(0);
 }
 
@@ -111,7 +132,7 @@ void    ft_printf_dlist(t_dlist *list)
     {
         printf("no\n");
         ft_printf_dlist(*stack_a);
-        write(1,"hola\n", 5);
+        write(1,"hol\na\n", 5);
         //printf("GUATATATATA\n");    
         printf("no stack_b\n");
         *stack_b = swap;
@@ -122,7 +143,7 @@ void    ft_printf_dlist(t_dlist *list)
 
 }*/
 
-void    push_x(t_dlist **stack_b, t_dlist **stack_a)
+void    push_x(t_dlist **stack_b, t_dlist **stack_a, char stack)
 {
     t_dlist   *swap;
 
@@ -149,10 +170,14 @@ void    push_x(t_dlist **stack_b, t_dlist **stack_a)
         (*stack_b)->next = (*stack_b);
         (*stack_b)->prev = (*stack_b);
     }
+    if(stack == 'a')
+        write(1, "pa\n", 3);
+    if(stack == 'b')
+        write(1, "pb\n", 3);
 }
 
 void    swap_a_and_b(t_dlist **stack_a, t_dlist **stack_b)
 {
-    swap_a_or_b(stack_a);
-    swap_a_or_b(stack_b);
+    swap_a_or_b(stack_a, 'a');
+    swap_a_or_b(stack_b, 'b');
 }

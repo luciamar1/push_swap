@@ -28,8 +28,6 @@ int    ft_clear_dlist(t_dlist  **list)
 
 void    ft_print_dlist(t_dlist  *list)
 {
-    // printf("primero %d\n", list->content);
-    //list = list->next;
     t_dlist *head;
     head = list;
     printf("\n\n\n");
@@ -38,16 +36,13 @@ void    ft_print_dlist(t_dlist  *list)
     while(list != head)
     {
         printf("lista == %d\n", list->content);
-        // printf("content %d\n", list->next->content);
-        // printf("next %d\n", list->prev->content);
         list = list->next;
-        // printf("\n\n\n");
     }
 }
 
 int ft_create_dlist(t_dlist **saltarina, int data)
 {
-     t_dlist *new;
+    t_dlist *new;
     
     new = malloc(sizeof(t_dlist));
     if(!new)
@@ -64,52 +59,74 @@ int ft_create_dlist(t_dlist **saltarina, int data)
     {
         (*saltarina)->next = new;
     }
-    //printf("array %d\n", (*saltarina)->content);
     *saltarina = new ;
     return(0);
+}
+
+char *create_stack(char *old, char *new)
+{
+    char    *array;
+    char    *space;
+    space = ft_strjoin(old, " ");
+    array = ft_strjoin(space, new);
+    free(old);
+    free(space);
+    return(array);
+}
+
+char **checker(int argc, char **argv)
+{
+    char    **stack;
+    char    *array;
+    int     counter;
+
+    if(argc == 1)
+        return(NULL);
+    counter = 2;
+    array = ft_strdup(argv[1]);
+    while(argv[counter])
+    {
+        array = create_stack(array, argv[counter++]);
+    }
+    printf("SPLIT   ==  %s\n", array);
+    stack = ft_split(array, ' ');
+    free(array);
+    return(stack);
 }
 
 int main(int argc, char **argv)
 {
     t_dlist *stack_a;
     t_dlist *stack_b;
+    char    **stack;
     int     i;
     int ar = argc;
+
+    stack = checker(argc, argv);
+    if (stack == NULL)
+        return(1);
+    int x = 0;
+    while(stack[x])
+        printf("array == %s", stack[x++]);
     stack_b = NULL;
-    //t_dlist *f_stack_b;
     t_dlist *f_stack_a;
     i = ar;
-    i = 1;
+    i = 0;
     f_stack_a = NULL;
-    ft_create_dlist(&f_stack_a, ft_atoi(argv[i++]));
+    ft_create_dlist(&f_stack_a, ft_atoi(stack[i++]));
     stack_a = f_stack_a;
-
-    while(argv[i])
+    while(stack[i])
     {
-        ft_create_dlist(&f_stack_a, ft_atoi(argv[i++]));
+        ft_create_dlist(&f_stack_a, ft_atoi(stack[i++]));
     }
     f_stack_a->next = stack_a;
     stack_a->prev = f_stack_a;
-    //swap_a_or_b(&f_stack_a);
-    //swap_a_and_b(&f_stack_a, &stack_b);
-    /*push_x(&stack_b, &stack_a);
-    rotate(&stack_b);
-    ft_print_dlist(stack_b);
-    push_x(&stack_b, &stack_a);
-    rotate(&stack_b);
-    ft_print_dlist(stack_b);
-    push_x(&stack_b, &stack_a);
-    rotate(&stack_b);
-    ft_print_dlist(stack_b);
-    while(stack_b)
-    {
-        printf("stack_b  ==  %d\n", stack_b->content);
-        stack_b = stack_b->next;
-    }*/
+    printf("\nHOOOOOLIIIIIIIIIS\n\n");
+    ft_print_dlist(stack_a);
+    printf("\nHOOOOOLIIIIIIIIIS\n\n");
+    
     algorithm(&stack_a, &stack_b);
-    //   printf("b == %d\n", stack_b->next->content);
-    //   printf("%d\n", stack_a->content);
-    //   printf("%d\n", stack_a->next->prev->content);
-    //ft_print_dlist(stack_a);
+    ft_print_dlist(stack_a);
+    ft_printf_dlist_ind(stack_a);
     return (0);
 }
