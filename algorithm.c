@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/28 17:07:57 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/08 21:40:20 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int choose(int len)
 
     if(len < 100)
         max = 2;
-    if(len >= 100 && len < 300)
+    else if(len >= 100 && len < 300)
         max = 4;
     else
         max = 8;
@@ -98,14 +98,12 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
     int op;
     
     len = ft_len_dlist(*stack_a);
-    printf("   leeeeen %d\n", len);
     max = choose(len);
     head = 1;
     int cont = 0;
     optim = 0;
     if (max == 0)
         max = 1;
-    ft_printf_dlist(*stack_a);
     while(*stack_a) 
     {
         while(len --)
@@ -115,17 +113,29 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                 op = optim;
                 while(op --)
                     *stack_a = (*stack_a)->prev;
-                while(optim --)
-                    rotate(stack_a, 'a');
+                if(optim < ft_len_dlist(*stack_a)/2)
+                {
+                    while(optim --)
+                        rotate(stack_a, 'a');
+
+                }
+                else 
+                {
+                    optim = ft_len_dlist(*stack_a) - optim;
+                    while(optim --)
+                        reverse_rotate(stack_a, 'a');
+                }
                 if(head == 1)
                 {
                     cont ++;
+                    //printf("             GUATATATATATAT   head 11111111111111    %d\n", (*stack_a)->index);
                     push_x(&(*stack_b), &(*stack_a), 'b');
                     head = 0;
                 }
                 else 
                 {
                     cont++;
+                    //printf("             GUATATATATATAT  222222222222222 %d\n", (*stack_a)->index);
                     push_x(&(*stack_b), &(*stack_a), 'b');
                     rotate(stack_b, 'b');
                     head = 1;
@@ -143,8 +153,7 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
             len = ft_len_dlist(*stack_a);
         max += max;
     }
-    printf("\n\n\n");
-    ft_printf_dlist_ind(*stack_b);
+
 }
 
 int ft_optim(int index, t_dlist *stack_next)
@@ -190,7 +199,8 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
             list = list->next;
             saltarin ++;
         }
-       if (list->index == ind && (saltarin / 2) < (len / 2))
+        printf("ykse %d\n", saltarin);
+       if (list->index == ind && saltarin < (len / 2))
        {
            while(saltarin --)
            {
@@ -198,16 +208,21 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
                
            }
        }
-       else if (list->index == ind && saltarin / 2 >= len / 2)
+       else if (list->index == ind && saltarin >= len / 2)
        {
             saltarin = ft_len_dlist(*stack_b)-saltarin;
            while(saltarin --)
                reverse_rotate(stack_b, 'b');
        }
        push_x(stack_a, stack_b, 'a');
-        if(*stack_b)
+       //printf("                            ME CAGO EN TO          =)\n");
+       if(*stack_b)
             list = *stack_b;
        ind --;
+       //printf("\nSTACK A\n");
+       //ft_printf_dlist_ind(*stack_a);
+       //printf("\nSTACK B\n");
+       //ft_printf_dlist_ind(*stack_b);
     }
 }
 
@@ -222,8 +237,9 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     else
     {
         push_20(stack_a, stack_b);
-        order_nums(stack_b, stack_a);
+       // order_nums(stack_b, stack_a);
     }
+    ft_printf_dlist_ind(*stack_b);
     
 }
 

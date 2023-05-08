@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/20 20:48:22 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/05 23:55:16 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,6 @@ char **checker(int argc, char **argv)
     {
         array = create_stack(array, argv[counter++]);
     }
-    printf("SPLIT   ==  %s\n", array);
     stack = ft_split(array, ' ');
     free(array);
     return(stack);
@@ -100,33 +99,36 @@ int main(int argc, char **argv)
     t_dlist *stack_b;
     char    **stack;
     int     i;
-    int ar = argc;
+    int     ai;
+    int     *error;
 
+    error = malloc(1*sizeof(int));
+    *error = 0;
     stack = checker(argc, argv);
     if (stack == NULL)
         return(1);
-    int x = 0;
-    while(stack[x])
-        printf("array == %s", stack[x++]);
     stack_b = NULL;
     t_dlist *f_stack_a;
-    i = ar;
     i = 0;
     f_stack_a = NULL;
-    ft_create_dlist(&f_stack_a, ft_atoi(stack[i++]));
+    ai = ft_atoi_chetao(stack[i++], error);
+    if(*error == 1)
+        return(1);
+    ft_create_dlist(&f_stack_a, ai);
     stack_a = f_stack_a;
     while(stack[i])
     {
-        ft_create_dlist(&f_stack_a, ft_atoi(stack[i++]));
+        ai = ft_atoi_chetao(stack[i++], error);
+        if(*error == 1)
+            return(1);
+       
+        ft_create_dlist(&f_stack_a, ai);
     }
     f_stack_a->next = stack_a;
     stack_a->prev = f_stack_a;
-    printf("\nHOOOOOLIIIIIIIIIS\n\n");
-    ft_print_dlist(stack_a);
-    printf("\nHOOOOOLIIIIIIIIIS\n\n");
     
     algorithm(&stack_a, &stack_b);
-    ft_print_dlist(stack_a);
-    ft_printf_dlist_ind(stack_a);
+    //ft_print_dlist(stack_a);
+    //ft_printf_dlist_ind(stack_a);
     return (0);
 }

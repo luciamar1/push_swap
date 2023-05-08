@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 12:27:02 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/24 20:43:03 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/05 20:50:13 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,21 +53,16 @@ int swap_a_or_b(t_dlist  **stack, char letter)
     
     if(!*stack)
         return (1);
-    printf("                                   GUATATATATTATATATAAAAAAA     == %d\n", ((*stack)->index));
     swap = (*stack)->content;
     (*stack)->content = ((*stack)->next->content);
     (*stack)->next->content = swap;
     swap = (*stack)->index;
     (*stack)->index = ((*stack)->next->index);
     (*stack)->next->index = swap;
-    printf("                                   GUATATATATTATATATAAAAAAA     == %d\n", ((*stack)->index));
-
     if(letter == 'a')
         write(1, "sa\n", 3);
     if(letter == 'b')
         write(1, "sb\n", 3);
-    printf("                                   GUATATATATTATATATAAAAAAA\n");
-    ft_printf_dlist_ind(*stack);
     return(0);
 }
 
@@ -96,11 +91,9 @@ void    ft_printf_dlist(t_dlist *list)
     t_dlist *start;
     
     start = list;
-    printf("print list == %d\n", list->content);
     list = list->next;
     while(list->content != start->content)
     {
-        printf("print list == %d\n", list->content);
         list = list->next;
     }
     printf("\n\n");
