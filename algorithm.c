@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/08 21:40:20 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:57:21 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,19 @@ int choose(int len)
     return(max);
 }
 
+int len_special(t_dlist *stack, int max)
+{  
+    int limit;
+
+    limit = 0;
+    while(stack->index != max)
+    {
+        stack = stack->next;
+        limit ++; 
+    }
+    return(limit);
+}
+
 void    push_20(t_dlist **stack_a, t_dlist **stack_b)
 {
     int len;
@@ -96,8 +109,10 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
     int max;
     int optim;
     int op;
+    int limit;
     
     len = ft_len_dlist(*stack_a);
+    limit = len;
     max = choose(len);
     head = 1;
     int cont = 0;
@@ -115,7 +130,7 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                     *stack_a = (*stack_a)->prev;
                 if(optim < ft_len_dlist(*stack_a)/2)
                 {
-                    while(optim --)
+                    while(optim --) 
                         rotate(stack_a, 'a');
 
                 }
@@ -130,6 +145,7 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                     cont ++;
                     //printf("             GUATATATATATAT   head 11111111111111    %d\n", (*stack_a)->index);
                     push_x(&(*stack_b), &(*stack_a), 'b');
+                    printf("                    ind == %d\n", (*stack_b)->index);
                     head = 0;
                 }
                 else 
@@ -137,6 +153,7 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                     cont++;
                     //printf("             GUATATATATATAT  222222222222222 %d\n", (*stack_a)->index);
                     push_x(&(*stack_b), &(*stack_a), 'b');
+                    printf("                    ind == %d\n", (*stack_b)->index);
                     rotate(stack_b, 'b');
                     head = 1;
                 }
@@ -149,9 +166,11 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                     (*stack_a) = (*stack_a)->next;
             }
         }
+        if(*stack_b)
+            order_nums(stack_b, stack_a);
         if (*stack_a)
-            len = ft_len_dlist(*stack_a);
-        max += max;
+            len = len_special(*stack_a, limit);
+        
     }
 
 }
