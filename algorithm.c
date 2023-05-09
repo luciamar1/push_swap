@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 15:57:21 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/09 20:22:01 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,14 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
     int optim;
     int op;
     int limit;
+    int min;
     
     len = ft_len_dlist(*stack_a);
     limit = len;
     max = choose(len);
     head = 1;
-    int cont = 0;
+    min = max;
+    //int cont = 0;
     optim = 0;
     if (max == 0)
         max = 1;
@@ -140,23 +142,7 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                     while(optim --)
                         reverse_rotate(stack_a, 'a');
                 }
-                if(head == 1)
-                {
-                    cont ++;
-                    //printf("             GUATATATATATAT   head 11111111111111    %d\n", (*stack_a)->index);
-                    push_x(&(*stack_b), &(*stack_a), 'b');
-                    printf("                    ind == %d\n", (*stack_b)->index);
-                    head = 0;
-                }
-                else 
-                {
-                    cont++;
-                    //printf("             GUATATATATATAT  222222222222222 %d\n", (*stack_a)->index);
-                    push_x(&(*stack_b), &(*stack_a), 'b');
-                    printf("                    ind == %d\n", (*stack_b)->index);
-                    rotate(stack_b, 'b');
-                    head = 1;
-                }
+                push_x(stack_a, stack_b, 'a');
                 optim = 0;
             }
             else
@@ -167,11 +153,12 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
             }
         }
         if(*stack_b)
-            order_nums(stack_b, stack_a);
+            order_nums(stack_b, stack_a, max - min);
         if (*stack_a)
             len = len_special(*stack_a, limit);
         
     }
+    max += max;
 
 }
 
@@ -198,7 +185,7 @@ int ft_optim(int index, t_dlist *stack_next)
         return(1);
 }
 
-void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
+void    order_nums(t_dlist **stack_b, t_dlist **stack_a, int min)
 {
     int len;
     int ind;
@@ -207,7 +194,7 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
     t_dlist *list;
 
     l = ft_len_dlist(*stack_b);
-    ind = l-1;
+    ind = min;
     list = *stack_b;
     while(l--)
     {
@@ -234,10 +221,11 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
                reverse_rotate(stack_b, 'b');
        }
        push_x(stack_a, stack_b, 'a');
+       rotate(stack_a, 'a');
        //printf("                            ME CAGO EN TO          =)\n");
        if(*stack_b)
             list = *stack_b;
-       ind --;
+       ind ++;
        //printf("\nSTACK A\n");
        //ft_printf_dlist_ind(*stack_a);
        //printf("\nSTACK B\n");
