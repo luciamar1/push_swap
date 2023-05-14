@@ -74,6 +74,7 @@ char *create_stack(char *old, char *new)
     return(array);
 }
 
+
 char **checker(int argc, char **argv)
 {
     char    **stack;
@@ -100,10 +101,9 @@ int main(int argc, char **argv)
     char    **stack;
     int     i;
     int     ai;
-    int     *error;
+    int     error;
 
-    error = malloc(1*sizeof(int));
-    *error = 0;
+    error = 0;
     stack = checker(argc, argv);
     if (stack == NULL)
         return(1);
@@ -111,15 +111,15 @@ int main(int argc, char **argv)
     t_dlist *f_stack_a;
     i = 0;
     f_stack_a = NULL;
-    ai = ft_atoi_chetao(stack[i++], error);
-    if(*error == 1)
+    ai = ft_atoi_chetao(stack[i++], &error);
+    if(error == 1)
         return(1);
     ft_create_dlist(&f_stack_a, ai);
     stack_a = f_stack_a;
     while(stack[i])
     {
-        ai = ft_atoi_chetao(stack[i++], error);
-        if(*error == 1)
+        ai = ft_atoi_chetao(stack[i++], &error);
+        if(error == 1)
             return(1);
        
         ft_create_dlist(&f_stack_a, ai);

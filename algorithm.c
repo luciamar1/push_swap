@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/09 20:22:01 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/08 21:40:20 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,19 +89,6 @@ int choose(int len)
     return(max);
 }
 
-int len_special(t_dlist *stack, int max)
-{  
-    int limit;
-
-    limit = 0;
-    while(stack->index != max)
-    {
-        stack = stack->next;
-        limit ++; 
-    }
-    return(limit);
-}
-
 void    push_20(t_dlist **stack_a, t_dlist **stack_b)
 {
     int len;
@@ -109,15 +96,13 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
     int max;
     int optim;
     int op;
-    int limit;
-    int min;
+    int aument;
     
     len = ft_len_dlist(*stack_a);
-    limit = len;
     max = choose(len);
     head = 1;
-    min = max;
-    //int cont = 0;
+    aument = max;
+    int cont = 0;
     optim = 0;
     if (max == 0)
         max = 1;
@@ -132,7 +117,7 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                     *stack_a = (*stack_a)->prev;
                 if(optim < ft_len_dlist(*stack_a)/2)
                 {
-                    while(optim --) 
+                    while(optim --)
                         rotate(stack_a, 'a');
 
                 }
@@ -142,7 +127,19 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                     while(optim --)
                         reverse_rotate(stack_a, 'a');
                 }
-                push_x(stack_a, stack_b, 'a');
+                if(head == 1)
+                {
+                    cont ++;
+                    push_x(&(*stack_b), &(*stack_a), 'b');
+                    head = 0;
+                }
+                else 
+                {
+                    cont++;
+                    push_x(&(*stack_b), &(*stack_a), 'b');
+                    rotate(stack_b, 'b');
+                    head = 1;
+                }
                 optim = 0;
             }
             else
@@ -152,13 +149,10 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
                     (*stack_a) = (*stack_a)->next;
             }
         }
-        if(*stack_b)
-            order_nums(stack_b, stack_a, max - min);
         if (*stack_a)
-            len = len_special(*stack_a, limit);
-        
+            len = ft_len_dlist(*stack_a);
+        max += aument;
     }
-    max += max;
 
 }
 
@@ -185,7 +179,7 @@ int ft_optim(int index, t_dlist *stack_next)
         return(1);
 }
 
-void    order_nums(t_dlist **stack_b, t_dlist **stack_a, int min)
+void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
 {
     int len;
     int ind;
@@ -194,7 +188,7 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a, int min)
     t_dlist *list;
 
     l = ft_len_dlist(*stack_b);
-    ind = min;
+    ind = l-1;
     list = *stack_b;
     while(l--)
     {
@@ -205,7 +199,6 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a, int min)
             list = list->next;
             saltarin ++;
         }
-        printf("ykse %d\n", saltarin);
        if (list->index == ind && saltarin < (len / 2))
        {
            while(saltarin --)
@@ -214,23 +207,20 @@ void    order_nums(t_dlist **stack_b, t_dlist **stack_a, int min)
                
            }
        }
-       else if (list->index == ind && saltarin >= len / 2)
+       else if (list->index == ind && saltarin >= (len / 2))
        {
             saltarin = ft_len_dlist(*stack_b)-saltarin;
            while(saltarin --)
                reverse_rotate(stack_b, 'b');
        }
        push_x(stack_a, stack_b, 'a');
-       rotate(stack_a, 'a');
-       //printf("                            ME CAGO EN TO          =)\n");
        if(*stack_b)
+       {
             list = *stack_b;
-       ind ++;
-       //printf("\nSTACK A\n");
-       //ft_printf_dlist_ind(*stack_a);
-       //printf("\nSTACK B\n");
-       //ft_printf_dlist_ind(*stack_b);
+       }
+       ind --;
     }
+
 }
 
 void algorithm(t_dlist **stack_a, t_dlist **stack_b)
@@ -244,9 +234,10 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     else
     {
         push_20(stack_a, stack_b);
-       // order_nums(stack_b, stack_a);
+        ft_printf_dlist_ind(*stack_b);
+        order_nums(stack_b, stack_a);
     }
-    ft_printf_dlist_ind(*stack_b);
+    //ft_printf_dlist_ind(*stack_a);
     
 }
 
