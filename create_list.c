@@ -63,7 +63,7 @@ int ft_create_dlist(t_dlist **saltarina, int data)
     return(0);
 }
 
-char *create_stack(char *old, char *new)
+char    *create_stack(char *old, char *new)
 {
     char    *array;
     char    *space;
@@ -126,6 +126,7 @@ int main(int argc, char **argv)
     }
     f_stack_a->next = stack_a;
     stack_a->prev = f_stack_a;
+    ft_freecharmatrix(stack);
     
     algorithm(&stack_a, &stack_b);
     //ft_print_dlist(stack_a);
