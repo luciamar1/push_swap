@@ -28,6 +28,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+void		*protect_malloc(size_t n);
 void		ft_freecharmatrix(char **matrix);
 void		ft_freeintmatrix(int **matrix, int sec_dimension);
 int			ft_atoi_chetao(const char *str, int *error);

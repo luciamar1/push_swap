@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:16:39 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/04/20 16:14:47 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/15 19:14:21 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ typedef struct s_dlist
     struct s_dlist  *prev;
 }   t_dlist;
 
+int    ft_clear_dlist(t_dlist  **list);
 int     ft_len_dlist(t_dlist *stack);
 void    ft_printf_dlist(t_dlist *list);
 void    ft_printf_dlist_ind(t_dlist *list);

@@ -1,44 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_list.c                                      :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/05 23:55:16 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/15 21:21:05 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-int    ft_clear_dlist(t_dlist  **list)
-{
-    if(!*list)
-        return(1);
-    free(*list);
-    while((*list)->next != (*list)->next->next)
-    {
-        *list = (*list)->next;
-        free(*list);
-    }
-    return(0);
-}
-
-
-void    ft_print_dlist(t_dlist  *list)
-{
-    t_dlist *head;
-    head = list;
-    printf("\n\n\n");
-    printf("lista == %d\n", list->content);
-    list = list->next;
-    while(list != head)
-    {
-        printf("lista == %d\n", list->content);
-        list = list->next;
-    }
-}
 
 int ft_create_dlist(t_dlist **saltarina, int data)
 {
@@ -94,6 +66,7 @@ char **checker(int argc, char **argv)
     return(stack);
 }
 
+
 int main(int argc, char **argv)
 {
     t_dlist *stack_a;
@@ -127,9 +100,6 @@ int main(int argc, char **argv)
     f_stack_a->next = stack_a;
     stack_a->prev = f_stack_a;
     ft_freecharmatrix(stack);
-    
     algorithm(&stack_a, &stack_b);
-    //ft_print_dlist(stack_a);
-    //ft_printf_dlist_ind(stack_a);
     return (0);
 }

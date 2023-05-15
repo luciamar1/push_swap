@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/08 21:40:20 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/15 21:18:21 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -234,7 +234,7 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     else
     {
         push_20(stack_a, stack_b);
-        ft_printf_dlist_ind(*stack_b);
+        //ft_printf_dlist_ind(*stack_b);
         order_nums(stack_b, stack_a);
     }
     //ft_printf_dlist_ind(*stack_a);
