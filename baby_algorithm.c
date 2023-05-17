@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/06 00:13:25 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/17 19:23:04 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,40 +16,26 @@
 void    put_baby_ind(t_dlist *a, int len)
 {   
     if(len == 3)
-    {
         while(len --)
-        {
-            a->index --;
-            a = a->next;
-        }
-    }
+            a = a->next,(a->index --);
     if(len == 6)
     {
         len = 4;
         while(len --)
-        {
-            a->index --;
-            a = a->next;
-        }    
+            a = a->next, (a->index --);
     }
     if (len == 4 || len == 5)
     {
-        len --;
-        a = a->next;
+        a = a->next, (len --);
         if(len == 4)
-        {
-            len --;
-            a = a->next;
-        }
+            a = a->next, (len --);
         while(len )
         {
             a->index ++;
             a = a->next;
             len --;
         }
-    }
-    
-        
+    }    
 }
 
 void    three_alg(t_dlist **a)
@@ -110,7 +96,6 @@ void    five_alg(t_dlist **a, t_dlist **b)
             reverse_rotate(a, 'a');
     
     push_x(b, a, 'b');
-    
     put_baby_ind(*a, 6);
     four_alg(a,  b, 5);
     push_x(a, b, 'a');
