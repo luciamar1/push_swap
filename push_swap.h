@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 14:16:39 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/15 19:14:21 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/16 16:52:09 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void    rotate_a_and_b(t_dlist **stack_a, t_dlist **stack_b, char stack);
 int     swap_a_or_b(t_dlist  **stack, char letter);
 void    swap_a_and_b(t_dlist **stack_a, t_dlist **stack_b);
 void    push_x(t_dlist **stack_b, t_dlist **stack_a, char stack);
-void    put_indice(t_dlist *list);
+void    put_indice(t_dlist *list, t_dlist *min, int len);
 void    select_algorithm(t_dlist **stack_a, t_dlist **stack_b);
 
 #endif

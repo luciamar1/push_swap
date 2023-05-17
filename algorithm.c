@@ -6,54 +6,17 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/15 21:18:21 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/17 14:18:49 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    ft_printf_dlist_ind(t_dlist *list)
+void    put_indice(t_dlist *list, t_dlist *min, int len)
 {
-    t_dlist *start;
-    
-    start = list;
-    printf("print list == %d\n", list->index);
-    list = list->next;
-    while(list->content != start->content)
-    {
-        printf("print list == %d\n", list->index);
-        list = list->next;
-    }
-    printf("\n\n");
-}
-
-int    ft_len_dlist(t_dlist *stack)
-{
-    int len;
-    t_dlist *init;
-
-    if (!stack)
-        return (0);
-    len = 1;
-    init = stack;
-    stack = stack->next;
-    while(stack != init)
-    {
-        len ++;
-        stack = stack->next;
-    }
-    return(len);
-}
-
-void    put_indice(t_dlist *list)
-{
-    t_dlist *min;
     int     ind;
-    int     len;
     int     l;
    
-    len = ft_len_dlist(list);
-    min = list;
     ind = 0;
     l = ft_len_dlist(list);
     while(len --)
@@ -86,60 +49,54 @@ int choose(int len)
     else
         max = 8;
     max = len/max;
+    if (max == 0)
+        max = 1;
     return(max);
+}
+
+void    if_less(t_dlist **stack_a, t_dlist **stack_b, int optim, int *head)
+{
+    int op;
+
+    op = optim;
+    while(op --)
+        *stack_a = (*stack_a)->prev;
+    if(optim < ft_len_dlist(*stack_a)/2)
+        while(optim --)
+            rotate(stack_a, 'a');
+    else 
+    {
+        optim = ft_len_dlist(*stack_a) - optim;
+        while(optim --)
+            reverse_rotate(stack_a, 'a');
+    }
+    push_x(&(*stack_b), &(*stack_a), 'b');
+    if(*head == 1)
+        *head = 0;
+    else 
+    {
+        rotate(stack_b, 'b');
+        *head = 1;
+    }
+    optim = 0;
 }
 
 void    push_20(t_dlist **stack_a, t_dlist **stack_b)
 {
-    int len;
-    int head;
-    int max;
-    int optim;
-    int op;
-    int aument;
+    int len, head, max, optim, aument;
     
     len = ft_len_dlist(*stack_a);
     max = choose(len);
     head = 1;
     aument = max;
-    int cont = 0;
     optim = 0;
-    if (max == 0)
-        max = 1;
     while(*stack_a) 
     {
         while(len --)
         {
             if((*stack_a)->index <= max)
             {
-                op = optim;
-                while(op --)
-                    *stack_a = (*stack_a)->prev;
-                if(optim < ft_len_dlist(*stack_a)/2)
-                {
-                    while(optim --)
-                        rotate(stack_a, 'a');
-
-                }
-                else 
-                {
-                    optim = ft_len_dlist(*stack_a) - optim;
-                    while(optim --)
-                        reverse_rotate(stack_a, 'a');
-                }
-                if(head == 1)
-                {
-                    cont ++;
-                    push_x(&(*stack_b), &(*stack_a), 'b');
-                    head = 0;
-                }
-                else 
-                {
-                    cont++;
-                    push_x(&(*stack_b), &(*stack_a), 'b');
-                    rotate(stack_b, 'b');
-                    head = 1;
-                }
+                if_less(stack_a, stack_b, optim, &head);
                 optim = 0;
             }
             else
@@ -153,7 +110,6 @@ void    push_20(t_dlist **stack_a, t_dlist **stack_b)
             len = ft_len_dlist(*stack_a);
         max += aument;
     }
-
 }
 
 int ft_optim(int index, t_dlist *stack_next)
@@ -179,48 +135,44 @@ int ft_optim(int index, t_dlist *stack_next)
         return(1);
 }
 
-void    order_nums(t_dlist **stack_b, t_dlist **stack_a)
+void    order_nums_push_a(t_dlist **stack_a, t_dlist **stack_b, t_dlist **list, int ind, int saltarin)
 {
     int len;
-    int ind;
-    int l;
-    int saltarin;
-    t_dlist *list;
 
-    l = ft_len_dlist(*stack_b);
-    ind = l-1;
-    list = *stack_b;
-    while(l--)
+    len = ft_len_dlist(*list);
+    if ((*list)->index == ind && saltarin < (len / 2))
+        while (saltarin--)
+                rotate(stack_b, 'b');
+    else if ((*list)->index == ind && saltarin >= (len / 2))
     {
-        len = ft_len_dlist(list);
+        saltarin = ft_len_dlist(*stack_b) - saltarin;
+        while (saltarin--)
+            reverse_rotate(stack_b, 'b');
+    } 
+    push_x(stack_a, stack_b, 'a');
+}
+
+void order_nums(t_dlist **stack_b, t_dlist **stack_a)
+{
+    int ind, l, saltarin;
+    t_dlist *list;
+    
+    l = ft_len_dlist(*stack_b);
+    ind = l - 1;
+    list = *stack_b;
+    while (l--)
+    {
         saltarin = 0;
-        while(list->index != ind)
+        while (list->index != ind)
         {
             list = list->next;
-            saltarin ++;
+            saltarin++;
         }
-       if (list->index == ind && saltarin < (len / 2))
-       {
-           while(saltarin --)
-           {
-               rotate(stack_b, 'b');
-               
-           }
-       }
-       else if (list->index == ind && saltarin >= (len / 2))
-       {
-            saltarin = ft_len_dlist(*stack_b)-saltarin;
-           while(saltarin --)
-               reverse_rotate(stack_b, 'b');
-       }
-       push_x(stack_a, stack_b, 'a');
-       if(*stack_b)
-       {
+        order_nums_push_a(stack_a, stack_b, &list, ind, saltarin);
+        if (*stack_b)
             list = *stack_b;
-       }
-       ind --;
+        ind--;
     }
-
 }
 
 void algorithm(t_dlist **stack_a, t_dlist **stack_b)
@@ -228,16 +180,14 @@ void algorithm(t_dlist **stack_a, t_dlist **stack_b)
     int len;
 
     len = ft_len_dlist(*stack_a);
-    put_indice(*stack_a);
+    put_indice(*stack_a, *stack_a, ft_len_dlist(*stack_a));
     if(len <= 5)
         select_algorithm(stack_a, stack_b);
     else
     {
         push_20(stack_a, stack_b);
-        //ft_printf_dlist_ind(*stack_b);
         order_nums(stack_b, stack_a);
     }
-    //ft_printf_dlist_ind(*stack_a);
     
 }
 

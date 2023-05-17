@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/15 21:21:05 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/16 17:53:08 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,40 +66,50 @@ char **checker(int argc, char **argv)
     return(stack);
 }
 
+int create_stack_a(char **stack, t_dlist **stack_a)
+{
+    int     i;
+    t_dlist *head;
+    int     ai;
+    int     error;
+
+    i = 0;
+    *stack_a = NULL;
+    ai = ft_atoi_chetao(stack[i++], &error);
+    if(error == 1 || ft_create_dlist(stack_a, ai) == 1)
+        return(1);
+    head = *stack_a;
+
+    while(stack[i])
+    {
+        ai = ft_atoi_chetao(stack[i++], &error);
+        if(error == 1 || ft_create_dlist(stack_a, ai) == 1)
+            return(1);
+    }
+    head->prev = *stack_a;
+    (*stack_a)->next = head;
+    (*stack_a) = (*stack_a)->next;
+
+    return (0);
+}
 
 int main(int argc, char **argv)
 {
     t_dlist *stack_a;
     t_dlist *stack_b;
     char    **stack;
-    int     i;
-    int     ai;
-    int     error;
 
-    error = 0;
     stack = checker(argc, argv);
-    if (stack == NULL)
+    if(stack == NULL)
         return(1);
     stack_b = NULL;
-    t_dlist *f_stack_a;
-    i = 0;
-    f_stack_a = NULL;
-    ai = ft_atoi_chetao(stack[i++], &error);
-    if(error == 1)
-        return(1);
-    ft_create_dlist(&f_stack_a, ai);
-    stack_a = f_stack_a;
-    while(stack[i])
-    {
-        ai = ft_atoi_chetao(stack[i++], &error);
-        if(error == 1)
-            return(1);
-       
-        ft_create_dlist(&f_stack_a, ai);
-    }
-    f_stack_a->next = stack_a;
-    stack_a->prev = f_stack_a;
+    
+    create_stack_a(stack, &stack_a);
     ft_freecharmatrix(stack);
     algorithm(&stack_a, &stack_b);
-    return (0);
+//    ft_printf_dlist(stack_a);
+ //   ft_printf_dlist_ind(stack_a);
+    ft_clear_dlist(&stack_a);
+
+    
 }
