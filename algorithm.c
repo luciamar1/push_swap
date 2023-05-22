@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/18 17:40:34 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/22 16:09:44 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	if_less(t_dlist **stack_a, t_dlist **stack_b, int optim, int *head)
 	push_x(&(*stack_b), &(*stack_a), 'b');
 	if (*head == 1)
 		*head = 0;
-	else 
+	else
 	{
 		rotate(stack_b, 'b');
 		*head = 1;
@@ -81,30 +81,39 @@ void	if_less(t_dlist **stack_a, t_dlist **stack_b, int optim, int *head)
 	optim = 0;
 }
 
-void	push_20(t_dlist **stack_a, t_dlist **stack_b, int len, int head)
+void	check_if_rotate(t_dlist **a, t_dlist **b, int *optim)
+{
+	static int optim = 0;
+
+}
+
+void	push_20(t_dlist **a, t_dlist **b, int len, int head)
 {
 	int	max;
 	int	aument;
-	int	optim;
+	//int	optim;
 
 	optim = 0;
 	max = choose(len);
 	aument = max;
-	while (*stack_a)
+	while (*a)
 	{
 		while (len --)
 		{
-			if ((*stack_a)->index <= max)
-				optim = 0, (if_less(stack_a, stack_b, optim, &head));
+			if ((*a)->index <= max)
+			{
+				optim = 0;
+				(if_less(a, b, optim, &head));
+			}
 			else
 			{
 				optim ++;
-				if (*stack_a)
-					(*stack_a) = (*stack_a)->next;
+				if (*a)
+					(*a) = (*a)->next;
 			}
 		}
-		if (*stack_a)
-			len = ft_len_dlist(*stack_a);
+		if (*a)
+			len = ft_len_dlist(*a);
 		max += aument;
 	}
 }
