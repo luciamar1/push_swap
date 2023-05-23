@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRCS = main.c movements.c algorithm.c baby_algorithm.c basics_link_circ_list.c
+SRCS = main.c movements.c algorithm.c baby_algorithm.c basics_link_circ_list.c algorithm_0.c
 
 OBJS = $(SRCS:.c=.o)
 OBJSB = $(SRCS:.c=.ob)

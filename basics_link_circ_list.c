@@ -6,77 +6,98 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 19:12:19 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/16 13:50:47 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:17:26 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void    ft_printf_dlist(t_dlist  *list)
+int	ft_create_dlist(t_dlist **saltarina, int data)
 {
-    t_dlist *head;
-    head = list;
-    printf("\n\n\n");
-    printf("content list == %d\n", list->content);
-    list = list->next;
-    while(list != head)
-    {
-        printf("content list == %d\n", list->content);
-        list = list->next;
-    }
+	t_dlist	*new;
+
+	new = malloc(sizeof(t_dlist));
+	if (!new)
+	{
+		ft_clear_dlist(saltarina);
+		return (1);
+	}
+	new->content = data;
+	new->index = -1;
+	new->prev = *saltarina;
+	new->next = NULL;
+	if (*saltarina != NULL)
+	{
+		(*saltarina)->next = new;
+	}
+	*saltarina = new ;
+	return (0);
 }
 
-int    ft_len_dlist(t_dlist *stack)
+void	ft_printf_dlist(t_dlist *list)
 {
-    int len;
-    t_dlist *init;
+	t_dlist	*head;
 
-    if (!stack)
-        return (0);
-    len = 1;
-    init = stack;
-    stack = stack->next;
-    while(stack != init)
-    {
-        len ++;
-        stack = stack->next;
-    }
-    return(len);
+	head = list;
+	printf("\n\n\n");
+	printf("content list == %d\n", list->content);
+	list = list->next;
+	while (list != head)
+	{
+		printf("content list == %d\n", list->content);
+		list = list->next;
+	}
 }
 
-void    ft_printf_dlist_ind(t_dlist *list)
+int	ft_len_dlist(t_dlist *stack)
 {
-    t_dlist *start;
-    
-    start = list;
-    printf("ind list == %d\n", list->index);
-    list = list->next;
-    while(list->content != start->content)
-    {
-        printf("ind list == %d\n", list->index);
-        list = list->next;
-    }
-    printf("\n\n");
+	int		len;
+	t_dlist	*init;
+
+	if (!stack)
+		return (0);
+	len = 1;
+	init = stack;
+	stack = stack->next;
+	while (stack != init)
+	{
+		len ++;
+		stack = stack->next;
+	}
+	return (len);
 }
 
-int    ft_clear_dlist(t_dlist  **list)
+void	ft_printf_dlist_ind(t_dlist *list)
 {
-    t_dlist *aux;
-    t_dlist *next_aux;
+	t_dlist	*start;
 
-    if(!*list)
-        return(1);
-    aux = *list;
-    next_aux = (*list)->next;
-    while(next_aux != *list)
-    {
-        free(aux);
-        aux = next_aux;
-        next_aux = aux->next;
-    }
-    free(aux);
-    *list = NULL;
-    return(0);
+	start = list;
+	printf("ind list == %d\n", list->index);
+	list = list->next;
+	while (list->content != start->content)
+	{
+		printf("ind list == %d\n", list->index);
+		list = list->next;
+	}
+	printf("\n\n");
 }
 
+int	ft_clear_dlist(t_dlist **list)
+{
+	t_dlist	*aux;
+	t_dlist	*next_aux;
 
+	if (!*list)
+		return (1);
+	aux = *list;
+	next_aux = (*list)->next;
+	while (next_aux != *list)
+	{
+		free(aux);
+		aux = next_aux;
+		next_aux = aux->next;
+	}
+	free(aux);
+	*list = NULL;
+	return (0);
+}
