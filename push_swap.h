@@ -31,6 +31,7 @@ typedef struct s_dlist
 	struct s_dlist	*prev;
 }	t_dlist;
 
+void	if_less(t_dlist **stack_a, t_dlist **stack_b, int optim, int *head);
 int		ft_create_dlist(t_dlist **saltarina, int data);
 int		ft_clear_dlist(t_dlist **list);
 int		ft_len_dlist(t_dlist *stack);

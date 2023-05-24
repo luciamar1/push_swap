@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 18:30:20 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/24 19:07:49 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,6 @@ int	choose(int len)
 
 void	if_less(t_dlist **stack_a, t_dlist **stack_b, int optim, int *head)
 {
-	int	op;
-
-	op = optim;
-	while (op --)
-		*stack_a = (*stack_a)->prev;
 	if (optim < ft_len_dlist(*stack_a) / 2)
 		while (optim --)
 			rotate(stack_a, 'a');
@@ -83,12 +78,14 @@ void	if_less(t_dlist **stack_a, t_dlist **stack_b, int optim, int *head)
 
 void	check_if_rotate(t_dlist **a, t_dlist **b, int max, int *head)
 {
+	t_dlist		*list;
 	static int	optim = 0;
 
+	list = *a;
 	if ((*a)->index <= max)
 	{
-		optim = 0;
 		(if_less(a, b, optim, head));
+		optim = 0;
 	}
 	else
 	{
