@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/24 20:11:41 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/25 18:17:34 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,12 +134,13 @@ int	ft_optim(int index, t_dlist *stack_next)
 		return (1);
 }
 
+
 void	order_nums_push_a(t_dlist **stack_a, t_dlist **stack_b, \
 		t_dlist **list, int ind)
 {
 	int			len;
 	int			saltarin;
-	
+
 	saltarin = 0;
 	len = ft_len_dlist(*list);
 	while ((*list)->index != ind)
@@ -157,6 +158,7 @@ void	order_nums_push_a(t_dlist **stack_a, t_dlist **stack_b, \
 			while (saltarin--)
 				reverse_rotate(stack_b, 'b');
 		}
+		printf("\n      stack == %d    index == %d   ind == %d\n", (*stack_b)->content, (*stack_b)->index, ind);
 		push_x(stack_a, stack_b, 'a');
 	}
 }
@@ -226,7 +228,7 @@ void	algorithm(t_dlist **stack_a, t_dlist **stack_b)
 	int	len;
 
 	len = ft_len_dlist(*stack_a);
-	put_indice(*stack_a, *stack_a, ft_len_dlist(*stack_a));
+	put_indice(*stack_a, *stack_a, 0);
 	if (len <= 5)
 		select_algorithm(stack_a, stack_b);
 	else
@@ -234,6 +236,6 @@ void	algorithm(t_dlist **stack_a, t_dlist **stack_b)
 		push_b_nuevo(stack_a, stack_b, ft_len_dlist(*stack_a));
 		ft_printf_dlist_ind(*stack_b);
 		order_nums(stack_b, stack_a);
-		ft_printf_dlist_ind(*stack_a);
+		//ft_printf_dlist_ind(*stack_a);
 	}
 }

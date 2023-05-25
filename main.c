@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/24 13:56:17 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/25 16:17:28 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ int	main(int argc, char **argv)
 	create_stack_a(stack, &stack_a);
 	ft_freecharmatrix(stack);
 	algorithm(&stack_a, &stack_b);
-	//ft_printf_dlist_ind(stack_a);
+	ft_printf_dlist_ind(stack_a);
 	ft_clear_dlist(&stack_a);
 }

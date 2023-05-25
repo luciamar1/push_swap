@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/24 19:07:49 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:15:04 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,9 @@ void	put_indice(t_dlist *list, t_dlist *min, int len)
 	int	ind;
 	int	l;
 
+	printf("llegas?  %d\n", len);
 	ind = 0;
-	l = ft_len_dlist(list);
+	len = ft_len_dlist(list);
 	while (len --)
 	{
 		l = ft_len_dlist(list);
@@ -37,6 +38,33 @@ void	put_indice(t_dlist *list, t_dlist *min, int len)
 		ind ++;
 	}
 }
+
+// void	put_indice(t_dlist *list, int l)
+// {
+// 	t_dlist	*min;
+// 	int		ind;
+// 	int		len;
+
+// 	len = ft_len_dlist(list);
+// 	min = list;
+// 	ind = 0;
+// 	while (len --)
+// 	{
+// 		l = ft_len_dlist(list);
+// 		while (l-- && (list)->index != -1)
+// 			list = (list)->next;
+// 		l = ft_len_dlist(list);
+// 		while (l--)
+// 		{
+// 			if ((list)->content < min->content && (list)->index == -1)
+// 				min = list;
+// 			list = (list)->next;
+// 		}
+// 		if (min->index == -1)
+// 			min->index = ind;
+// 		ind ++;
+// 	}
+// }
 
 int	choose(int len)
 {
