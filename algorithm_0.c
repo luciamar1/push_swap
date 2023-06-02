@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/25 18:17:34 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:26:04 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,16 @@ void	if_less_push_b(t_dlist **a, t_dlist **b, int optim)
 	static int	head = 1;
 
 	len = ft_len_dlist(*a);
-	printf("    optim === %d   head == %d\n", optim, head);
+	//printf("    optim === %d   head == %d\n", optim, head);
 	if (optim <= len / 2)
 		while (optim --)
 			rotate(a, 'a');
 	else
 	{
-		printf("      %d \n", optim);
+		//printf("      %d \n", optim);
 		optim = len - optim;
 		sleep(5);
-		printf("      %d \n", optim);
+		//printf("      %d \n", optim);
 		while (optim --)
 		{
 			reverse_rotate(a, 'a');
@@ -52,7 +52,7 @@ void	push_b_nuevo(t_dlist **a, t_dlist **b, int len)
 
 	max = choose(len);
 	aument = max;
-	printf(" %p\n ", *b);
+	//printf(" %p\n ", *b);
 	while (*a)
 	{
 		list = *a;
@@ -62,7 +62,7 @@ void	push_b_nuevo(t_dlist **a, t_dlist **b, int len)
 		{
 			if (list->index <= max)
 			{
-				printf("    max === %d   index == %d   content == %d\n", max, list->index, list->content);
+				//printf("    max === %d   index == %d   content == %d\n", max, list->index, list->content);
 				if_less_push_b(a, b, optim);
 				optim = 0;
 				list = *a;
@@ -158,7 +158,7 @@ void	order_nums_push_a(t_dlist **stack_a, t_dlist **stack_b, \
 			while (saltarin--)
 				reverse_rotate(stack_b, 'b');
 		}
-		printf("\n      stack == %d    index == %d   ind == %d\n", (*stack_b)->content, (*stack_b)->index, ind);
+		////printf("\n      stack == %d    index == %d   ind == %d\n", (*stack_b)->content, (*stack_b)->index, ind);
 		push_x(stack_a, stack_b, 'a');
 	}
 }
@@ -177,17 +177,17 @@ void	order_nums_push_a(t_dlist **stack_a, t_dlist **stack_b, \
 // 		optim = ((ind ++), 2);
 // 	else if (optim == 2)
 // 		optim = ((ind --), 2);
-// 	printf("                index  ==  %d     ind  ==  %d\n", (*list)->index, ind);
+// 	//printf("                index  ==  %d     ind  ==  %d\n", (*list)->index, ind);
 // 	while ((*list)->index == ind)
 // 	{
-// 		printf("yuhuuuu\n");
+// 		//printf("yuhuuuu\n");
 // 		*list = ((saltarin++), (*list)->next);
 // 	}
 // 	if ((*list)->index == ind - 1 && optim != 2)
 // 		optim = 1;
 // 	if(optim == 1 || (*list)->index == ind )
 // 	{
-// 		//printf("            saltarin == %d\n", saltarin);
+// 		////printf("            saltarin == %d\n", saltarin);
 
 // 		if (saltarin < (len / 2))
 // 			while (saltarin--)
@@ -234,8 +234,8 @@ void	algorithm(t_dlist **stack_a, t_dlist **stack_b)
 	else
 	{
 		push_b_nuevo(stack_a, stack_b, ft_len_dlist(*stack_a));
-		ft_printf_dlist_ind(*stack_b);
+		//ft_//printf_dlist_ind(*stack_b);
 		order_nums(stack_b, stack_a);
-		//ft_printf_dlist_ind(*stack_a);
+		//ft_//printf_dlist_ind(*stack_a);
 	}
 }

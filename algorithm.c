@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/25 17:15:04 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/05/31 14:24:26 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	put_indice(t_dlist *list, t_dlist *min, int len)
 	int	ind;
 	int	l;
 
-	printf("llegas?  %d\n", len);
+	//printf("llegas?  %d\n", len);
 	ind = 0;
 	len = ft_len_dlist(list);
 	while (len --)
