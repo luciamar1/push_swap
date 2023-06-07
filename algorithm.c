@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 14:24:26 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/06/07 16:22:15 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,6 @@ void	put_indice(t_dlist *list, t_dlist *min, int len)
 		ind ++;
 	}
 }
-
-// void	put_indice(t_dlist *list, int l)
-// {
-// 	t_dlist	*min;
-// 	int		ind;
-// 	int		len;
-
-// 	len = ft_len_dlist(list);
-// 	min = list;
-// 	ind = 0;
-// 	while (len --)
-// 	{
-// 		l = ft_len_dlist(list);
-// 		while (l-- && (list)->index != -1)
-// 			list = (list)->next;
-// 		l = ft_len_dlist(list);
-// 		while (l--)
-// 		{
-// 			if ((list)->content < min->content && (list)->index == -1)
-// 				min = list;
-// 			list = (list)->next;
-// 		}
-// 		if (min->index == -1)
-// 			min->index = ind;
-// 		ind ++;
-// 	}
-// }
 
 int	choose(int len)
 {
@@ -106,10 +79,8 @@ void	if_less(t_dlist **stack_a, t_dlist **stack_b, int optim, int *head)
 
 void	check_if_rotate(t_dlist **a, t_dlist **b, int max, int *head)
 {
-	t_dlist		*list;
 	static int	optim = 0;
 
-	list = *a;
 	if ((*a)->index <= max)
 	{
 		(if_less(a, b, optim, head));

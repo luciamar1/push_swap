@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/31 14:24:03 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/06/07 23:25:31 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,37 @@ char	*create_stack(char *old, char *new)
 	return (array);
 }
 
+
+int	menores_equals(char **str)
+{
+	int cont;
+	int	equal;
+	int	ok;
+
+	ok = 0;
+	cont = 0;
+	while(str[cont])
+	{
+		equal = cont + 1;
+		while(str[equal])
+		{
+			if(ft_atoi(str[cont]) == ft_atoi(str[equal]))
+				return(1);
+			equal ++;
+
+		}
+		if(str[cont + 1])
+		{
+			if(ft_atoi(str[cont]) > ft_atoi(str[cont + 1]))
+				ok = 1;
+		}
+		cont ++;
+	}
+	if(ok == 0)
+		return(1);
+	return(0);
+}
+
 char	**checker(int argc, char **argv)
 {
 	char	**stack;
@@ -66,7 +97,23 @@ char	**checker(int argc, char **argv)
 	{
 		array = create_stack(array, argv[counter++]);
 	}
+	counter = 0;
+	while(array[counter] && (ft_isdigit(array[counter]) == 1 || array[counter] == ' '))
+	{
+		counter ++;
+	}
+	if(array[counter])
+	{
+		free(array);
+		return(NULL);
+	}
 	stack = ft_split(array, ' ');
+	if(menores_equals(stack) == 1)
+	{
+		free(array);
+		ft_freecharmatrix(stack);
+		return (NULL);
+	}
 	free(array);
 	return (stack);
 }
@@ -82,13 +129,19 @@ int	create_stack_a(char **stack, t_dlist **stack_a)
 	*stack_a = NULL;
 	ai = ft_atoi_any_characters(stack[i++], &error);
 	if (error == 1 || ft_create_dlist(stack_a, ai) == 1)
+	{
+		ft_freecharmatrix(stack);
 		return (1);
+	}
 	head = *stack_a;
 	while (stack[i])
 	{
-		ai = ft_atoi_chetao(stack[i++], &error);
+		ai = ft_atoi_any_characters(stack[i++], &error);
 		if (error == 1 || ft_create_dlist(stack_a, ai) == 1)
+		{
+			ft_freecharmatrix(stack);
 			return (1);
+		}
 	}
 	head->prev = *stack_a;
 	(*stack_a)->next = head;

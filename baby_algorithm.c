@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/28 20:20:21 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/22 18:31:00 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/06/06 17:44:11 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,12 +87,15 @@ void	five_alg(t_dlist **a, t_dlist **b)
 		utils = utils->next;
 		count ++;
 	}
-	if (count / 2 <= 2)
+	if (count / 2 < 2)
 		while (count --)
 			rotate(a, 'a');
 	else
+	{
+		count = 5-count; 
 		while (count --)
 			reverse_rotate(a, 'a');
+	}
 	push_x(b, a, 'b');
 	put_baby_ind(*a, 6);
 	four_alg(a, b, 5);
