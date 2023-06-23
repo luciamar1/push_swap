@@ -6,17 +6,19 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/06/07 23:25:31 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:12:28 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	ft_atoi_any_characters(const char *str, int *error)
+int	ft_atoi_any_characters(char *str, int *error)
 {
 	int				c;
-	unsigned int	x;
+	long long int	x;
+	char			*max;
 
+	max = str;
 	c = 1;
 	x = 0;
 	while (*str)
@@ -33,6 +35,13 @@ int	ft_atoi_any_characters(const char *str, int *error)
 			return ((*error = 1), 1);
 		if (x > 0x80000000 && c == -1)
 			return ((*error = 1), 0);
+
+		if(ft_strlen(max) >= 19)
+		{
+			*error = 1;
+			return (0);
+		}
+		
 		return (c * x);
 		str++;
 	}
@@ -130,7 +139,7 @@ int	create_stack_a(char **stack, t_dlist **stack_a)
 	ai = ft_atoi_any_characters(stack[i++], &error);
 	if (error == 1 || ft_create_dlist(stack_a, ai) == 1)
 	{
-		ft_freecharmatrix(stack);
+		
 		return (1);
 	}
 	head = *stack_a;

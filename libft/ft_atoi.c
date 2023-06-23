@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 02:20:45 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/06/07 22:57:48 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/06/23 18:04:44 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	ft_atoi(const char *str)
 {
 	int				c;
-	unsigned int	x;
+	long long int	x;
 
 	c = 1;
 	x = 0;
@@ -40,11 +40,13 @@ int	ft_atoi(const char *str)
 	return (0);
 }
 
-int	ft_atoi_chetao(const char *str, int *error)
+int	ft_atoi_chetao(char *str, int *error)
 {
 	int				c;
 	unsigned int	x;
-
+	char			*max;
+	printf("kaka\n");
+	max = str;
 	c = 1;
 	x = 0;
 	while (*str)
@@ -70,7 +72,14 @@ int	ft_atoi_chetao(const char *str, int *error)
 		{
 			*error = 1;
 			return (0);
-		}	
+		}
+		//printf("kaka %d\n", ft_strlen(max));
+		if(ft_strlen(max) >= 19)
+		{
+			printf("kaka\n");
+			*error = 1;
+			return (0);
+		}
 		return (c * x);
 		str++;
 	}
