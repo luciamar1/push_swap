@@ -1,6 +1,6 @@
 NAME = push_swap
 
-SRCS = main.c movements.c algorithm.c baby_algorithm.c basics_link_circ_list.c algorithm_0.c
+SRCS = main.c movements.c algorithm.c baby_algorithm.c basics_link_circ_list.c stack.c first_step.c second_step.c
 
 OBJS = $(SRCS:.c=.o)
 OBJSB = $(SRCS:.c=.ob)
@@ -8,7 +8,7 @@ OBJSB = $(SRCS:.c=.ob)
 LIB = libft/libft.a
 
 CC = gcc
-CFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
+CFLAGS = -Wall -Wextra -Werror #-g3 -fsanitize=address
 
 $(NAME): $(OBJS)
 	@make -C libft

@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/15 19:12:19 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/05/25 17:22:16 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/06/27 20:35:41 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ void	ft_printf_dlist_ind(t_dlist *list)
 	while (list->content != start->content)
 	{
 		printf("ind list  ==  %d\n", list->index);
-		//printf("\nind list == %d\n content  == %d\n\n", list->index, list->content);
 		list = list->next;
 	}
 	printf("\n\n");
