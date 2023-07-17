@@ -1,0 +1,5 @@
+.vscode
+push_swap_Tester
+*.o
+.DS_Store
+*.txt
