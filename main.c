@@ -6,16 +6,16 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/06/27 20:55:55 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/07/24 18:38:55 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// void	fre(void)
-// {
-// 	system("leaks -q push_swap");
-// }
+//  void	fre(void)
+//  {
+//  	system("leaks -q push_swap");
+//  }
 
 int	ft_atoi_any_characters(char *str, int *error)
 {
@@ -117,8 +117,11 @@ int	main(int argc, char **argv)
 	char	**stack;
 
 	stack = checker(argc, argv);
-	if (stack == NULL)
+	if (stack == NULL )
+	{
+		write(2, "Error\n", 6);
 		return (1);
+	}
 	stack_b = NULL;
 	if (create_stack_a(stack, &stack_a) == 1)
 	{
