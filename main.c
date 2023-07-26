@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/07/24 18:38:55 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:49:52 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 //  {
 //  	system("leaks -q push_swap");
 //  }
-
 int	ft_atoi_any_characters(char *str, int *error)
 {
 	int				c;
@@ -28,20 +27,21 @@ int	ft_atoi_any_characters(char *str, int *error)
 	{
 		while ((*str >= 9 && *str <= 13) || *str == ' ')
 			str++;
-		if (ft_isalpha(*str))
-			return ((*error = 1), 0);
+		*error = ft_rec(str);
+		if (*error == 1)
+			return (1);
 		if ((*str == '+' || *str == '-' ))
-			if (*str == '-')
+			if ((*str == '-') || (ft_isalnum(*str + 1)))
 				c = ((str ++), c * -1);
 		while (*str <= '9' && *str >= '0')
 			x = x * 10 + (*str++ - '0');
 		if ((x > 0x80000000 && c == -1) || (x > 0x7fffffff && c == 1) \
 			|| ft_strlen(max) >= 19)
-			return ((*error = 1), 0);
+			return ((*error = 1), 1);
 		return (c * x);
 		str++;
 	}
-	return (*error = 1, 0);
+	return (*error = 1, 1);
 }
 
 char	*create_stack(char *old, char *new)
@@ -69,7 +69,7 @@ int	menores_equals(char **str)
 		while (str[equal])
 		{
 			if (ft_atoi(str[cont]) == ft_atoi(str[equal]))
-				return (1);
+				return (write(2, "Error\n", 6), 1);
 			equal ++;
 		}
 		if (str[cont + 1])
@@ -90,9 +90,9 @@ char	**checker(int argc, char **argv)
 	char	*array;
 	int		counter;
 
-	if (argc == 1)
-		return (NULL);
 	counter = 2;
+	if (argc == 1 || !argv[counter])
+		return (write(2, "Error\n", 6), NULL);
 	array = ft_strdup(argv[1]);
 	while (argv[counter])
 	{
@@ -100,7 +100,7 @@ char	**checker(int argc, char **argv)
 	}
 	counter = 0;
 	stack = ft_split(array, ' ');
-	if (menores_equals(stack) == 1)
+	if (menores_equals(stack) == 1 || !stack)
 	{
 		free(array);
 		ft_freecharmatrix(stack);
@@ -118,10 +118,7 @@ int	main(int argc, char **argv)
 
 	stack = checker(argc, argv);
 	if (stack == NULL )
-	{
-		write(2, "Error\n", 6);
 		return (1);
-	}
 	stack_b = NULL;
 	if (create_stack_a(stack, &stack_a) == 1)
 	{

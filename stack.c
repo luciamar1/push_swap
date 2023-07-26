@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 16:20:26 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/06/27 20:12:13 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/07/26 22:29:16 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	create_stack_a(char **stack, t_dlist **stack_a)
 	*stack_a = ((i = 0), NULL);
 	ai = ft_atoi_any_characters(stack[i++], &error);
 	if (error == 1 || ft_create_dlist(stack_a, ai) == 1)
-		return (1);
+		return (write(2, "Error\n", 6), 1);
 	head = *stack_a;
 	while (stack[i])
 	{

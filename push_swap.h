@@ -31,6 +31,7 @@ typedef struct s_dlist
 	struct s_dlist	*prev;
 }	t_dlist;
 
+int		ft_rec(char *str);
 int		ft_atoi_any_characters(char *str, int *error);
 int		create_stack_a(char **stack, t_dlist **stack_a);
 void	push_b_nuevo(t_dlist **a, t_dlist **b, int len);
