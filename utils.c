@@ -12,13 +12,14 @@
 
 #include "push_swap.h"
 
-int	ft_rec(char *str)
+int	ft_isalpha_str(char *str)
 {
 	while (*str)
 	{
 		if (ft_isalpha(*str) == 1)
-			return (write(2, "Error\n", 6), 1);
+			return (1);
 		str++;
+		
 	}
 	return (0);
 }

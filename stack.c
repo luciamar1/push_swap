@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	create_stack_a(char **stack, t_dlist **stack_a)
+int	create_stack_a(char **stack, t_dlist **stack_a, int *ms)
 {
 	int		i;
 	t_dlist	*head;
@@ -20,19 +20,19 @@ int	create_stack_a(char **stack, t_dlist **stack_a)
 	int		error;
 
 	*stack_a = ((i = 0), NULL);
-	ai = ft_atoi_any_characters(stack[i++], &error);
+	ai = ft_atoi_push_swap(stack[i++], &error);
 	if (error == 1 || ft_create_dlist(stack_a, ai) == 1)
-		return (write(2, "Error\n", 6), 1);
+		return ((*ms = 1), 1);
 	head = *stack_a;
 	while (stack[i])
 	{
-		ai = ft_atoi_any_characters(stack[i++], &error);
+		ai = ft_atoi_push_swap(stack[i++], &error);
 		if (error == 1 || ft_create_dlist(stack_a, ai) == 1)
 		{
 			head->prev = *stack_a;
 			(*stack_a)->next = head;
 			(*stack_a) = (*stack_a)->next;
-			return ((ft_freecharmatrix(stack)), 1);
+			return ((*ms = 1), (ft_freecharmatrix(stack)), 1);
 		}
 	}
 	head->prev = *stack_a;
