@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   iter_str.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/07/26 22:50:29 by lucia-ma         ###   ########.fr       */
+/*   Created: 2022/08/12 02:21:09 by lucia-ma          #+#    #+#             */
+/*   Updated: 2023/08/02 15:03:10 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "libft.h"
 
-int	ft_isalpha_str(char *str)
+int	ft_iterstr_intprove(char *str, int (*f)(int))
 {
 	while (*str)
 	{
-		if (ft_isalpha(*str) == 1)
+		if (f(*str) == 1)
 			return (1);
 		str++;
-		
 	}
 	return (0);
 }

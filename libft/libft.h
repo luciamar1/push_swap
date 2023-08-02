@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/12 19:51:03 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/06/23 00:05:05 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/02 14:50:48 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int			ft_iterstr_intprove(char *str, int (*f)(int));
 void		*protect_malloc(size_t n);
 void		ft_freecharmatrix(char **matrix);
 void		ft_freeintmatrix(int **matrix, int sec_dimension);

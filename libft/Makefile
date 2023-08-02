@@ -1,5 +1,6 @@
 NAME = libft.a
-SRC = ft_isalpha.c				\
+SRC = 	iter_str.c					\
+		ft_isalpha.c				\
 		ft_freecharmatrix.c			\
 		ft_freeintmatrix.c			\
 		ft_isdigit.c				\

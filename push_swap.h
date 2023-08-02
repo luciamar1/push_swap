@@ -31,29 +31,42 @@ typedef struct s_dlist
 	struct s_dlist	*prev;
 }	t_dlist;
 
-int		ft_isalpha_str(char *str);
+////////// CHECKER /////////
+int		menores_equals(char **str, int	*message);
+int		ft_equals(char **str, int count);
+int		ft_ordered(char **str);
+int		ft_duplicate_signs(char *str);
+int		around_argv(char **str, int	*ms);
+
+/////////  CREATEE STACK/////
 int		ft_atoi_push_swap(char *str, int *error);
 int		create_stack_a(char **stack, t_dlist **stack_a, int *ms);
 void	push_b_nuevo(t_dlist **a, t_dlist **b, int len);
-void	if_less(t_dlist **stack_a, t_dlist **stack_b, int optim, int *head);
+void	put_indice(t_dlist *list, t_dlist *min, int len);
+
+////////  FUNCTIONS DOBLE LINKED CIRCULAR LISTS
 int		ft_create_dlist(t_dlist **saltarina, int data);
 int		ft_clear_dlist(t_dlist **list);
 int		ft_len_dlist(t_dlist *stack);
-void	ft_printf_dlist(t_dlist *list);
 void	ft_printf_dlist_ind(t_dlist *list);
-void	push_20(t_dlist **stack_a, t_dlist **stack_b, int len, int head);
-void	order_nums(t_dlist **stack_b, t_dlist **stack_a);
+
+////////  ALGORITHM GESTION  /////////
 void	algorithm(t_dlist **stack_a, t_dlist **stack_b);
-void	reverse_rotate_a_b(t_dlist **stack_a, t_dlist **stack_b, char stack);
+void	select_algorithm(t_dlist **stack_a, t_dlist **stack_b);
+
+/////////  ALGORITHM FIRST STEP  //////// 
+void	if_less(t_dlist **stack_a, t_dlist **stack_b, int optim, int *head);
+void	ft_printf_dlist(t_dlist *list);
+void	push_20(t_dlist **stack_a, t_dlist **stack_b, int len, int head);
+int		choose(int len);
+
+/////////  ALGORITHM SECOND STEP  //////// 
+void	order_nums(t_dlist **stack_b, t_dlist **stack_a);
+
+/////////  MOVEMENTS ////////
 void	reverse_rotate(t_dlist **stack_a, char stack);
 void	rotate(t_dlist **stack_a, char stack);
-void	rotate_a_and_b(t_dlist **stack_a, t_dlist **stack_b, char stack);
 int		swap_a_or_b(t_dlist **stack, char letter);
-void	swap_a_and_b(t_dlist **stack_a, t_dlist **stack_b);
 void	push_x(t_dlist **stack_b, t_dlist **stack_a, char stack);
-void	put_indice(t_dlist *list, t_dlist *min, int len);
-void	select_algorithm(t_dlist **stack_a, t_dlist **stack_b);
-int		choose(int len);
-void	check_if_rotate(t_dlist **a, t_dlist **b, int max, int *head);
 
 #endif
