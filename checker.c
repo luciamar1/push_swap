@@ -6,7 +6,7 @@
 /*   By: lucia-ma <lucia-ma@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/22 17:13:37 by lucia-ma          #+#    #+#             */
-/*   Updated: 2023/08/02 15:00:23 by lucia-ma         ###   ########.fr       */
+/*   Updated: 2023/08/03 21:57:04 by lucia-ma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int	ft_duplicate_signs(char *str)
 			if (count > 0 && (str[count - 1] != ' ' && (str[count - 1] < 9 || \
 				str[count - 1] > 13) && str[count - 1] != '"' ))
 				return (1);
+			if (ft_strlen(str) == 1)
+				return (1);
 			count ++;
 			if (str[count] == '+' || str[count] == '-')
 				return (1);
@@ -100,7 +102,9 @@ int	around_argv(char **str, int	*ms)
 			return ((*ms = 1), 1);
 		if (ft_duplicate_signs(str[count]) == 1)
 			return ((*ms = 1), 1);
-		if (ft_iterstr_intprove(str[count], &ft_isalpha) == 1)
+		printf("iter == %d\n", ft_iterstr_intprove(str[count], &ft_issign, 0));
+		if ((ft_iterstr_intprove(str[count], &ft_isdigit, 0) == 1) && \
+			ft_iterstr_intprove(str[count], &ft_issign, 0) == 1)
 			return ((*ms = 1), 1);
 		count ++;
 	}
