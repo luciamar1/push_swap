@@ -15,16 +15,19 @@
 
 int	ft_isalpha(int c)
 {
-	if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z') && c != 164)
+	if ((c < 'a' || c > 'z') && (c < 'A' || c > 'Z'))
 		return (0);
 	return (1);
 }
 
-int	ft_issign(int c)
+int ft_issign(int c)
 {
-	if (c == 43 || c == 45)
-	{
+	if(c == '+' || c == '-')
 		return (1);
-	}
-	return (0);
+	return(0);
+}
+
+int	ft_isdigitsign(int c)
+{
+	return (ft_isdigit(c) || ft_issign(c));
 }

@@ -28,6 +28,7 @@ typedef struct s_list
 	struct s_list	*next;
 }	t_list;
 
+int	ft_isdigitsign(int c);
 int			ft_iterstr_intprove(char *str, int (*f)(int), int prove);
 void		*protect_malloc(size_t n);
 void		ft_freecharmatrix(char **matrix);

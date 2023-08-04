@@ -16,6 +16,7 @@ int	ft_iterstr_intprove(char *str, int (*f)(int), int prove)
 {
 	while (*str)
 	{
+		//printf("funcion iter == %d char == %c\n", f(*str), *str);
 		if (f(*str) == prove)
 			return (1);
 		str++;

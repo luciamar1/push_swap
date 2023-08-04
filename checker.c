@@ -17,6 +17,7 @@ int	menores_equals(char **str, int	*message)
 	int	cont;
 	int	equal;
 	int	ok;
+	int error;
 
 	cont = ((ok = 0), 0);
 	while (str[cont])
@@ -24,12 +25,12 @@ int	menores_equals(char **str, int	*message)
 		equal = cont + 1;
 		while (str[equal])
 		{
-			if (ft_atoi(str[cont]) == ft_atoi(str[equal]))
+			if (ft_atoi_chetao(str[cont], &error) == ft_atoi_chetao(str[equal], &error))
 				return (*message = 1, 1);
 			equal ++;
 		}
 		if (str[cont + 1])
-			if (ft_atoi(str[cont]) > ft_atoi(str[cont + 1]))
+			if (ft_atoi_chetao(str[cont], &error) > ft_atoi_chetao(str[cont + 1], &error))
 				ok = 1;
 		cont ++;
 	}
@@ -41,12 +42,19 @@ int	menores_equals(char **str, int	*message)
 int	ft_equals(char **str, int count)
 {
 	int	equal;
+	int error;
 
 	equal = count + 1;
+	ft_atoi_push_swap(str[count], &error);
+	if(error == 1)
+		return(1);
+
 	while (str[equal])
 	{
-		if (ft_atoi(str[count]) == ft_atoi(str[equal]))
+		if (ft_atoi_chetao(str[count], &error) == ft_atoi_chetao(str[equal], &error))
 			return (1);
+		if(error == 1)
+			return(1);
 		equal ++;
 	}
 	return (0);
@@ -77,7 +85,7 @@ int	ft_duplicate_signs(char *str)
 		if (str[count] == '+' || str[count] == '-')
 		{
 			if (count > 0 && (str[count - 1] != ' ' && (str[count - 1] < 9 || \
-				str[count - 1] > 13) && str[count - 1] != '"' ))
+				str[count - 1] > 13)/* && str[count - 1] != '"'*/ ))
 				return (1);
 			if (ft_strlen(str) == 1)
 				return (1);
@@ -100,12 +108,14 @@ int	around_argv(char **str, int	*ms)
 	{
 		if (ft_equals(str, count) == 1)
 			return ((*ms = 1), 1);
+
 		if (ft_duplicate_signs(str[count]) == 1)
 			return ((*ms = 1), 1);
-		printf("iter == %d\n", ft_iterstr_intprove(str[count], &ft_issign, 0));
-		if ((ft_iterstr_intprove(str[count], &ft_isdigit, 0) == 1) && \
-			ft_iterstr_intprove(str[count], &ft_issign, 0) == 1)
-			return ((*ms = 1), 1);
+		if ( (ft_iterstr_intprove(str[count], &ft_isdigitsign, 0) == 1)) 
+		{
+				return ((*ms = 1), 1);
+
+		}	
 		count ++;
 	}
 	if (ft_ordered(str) == 0)

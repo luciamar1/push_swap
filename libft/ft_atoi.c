@@ -30,6 +30,8 @@ int	ft_atoi(const char *str)
 				c *= -1;
 		while (*str <= '9' && *str >= '0')
 			x = x * 10 + (*str++ - '0');
+
+
 		if (x > 0x7fffffff && c == 1)
 			return (-1);
 		if (x > 0x80000000 && c == -1)
